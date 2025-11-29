@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataSol</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+
+    <header class="head_system">
+        <h1>DataSol <br> Energia Solar Comunitária</h1>
+    </header>
+
+    <div class="user_identification" id="user_identification">
+
+        <h3>Identificação:</h3>
+        <input type="text">
+        <h3>Nome:</h3>
+        <input type="text">
+        <h3>Acesso:</h3>
+        <input type="text">
+
+    </div>
+
+    <nav class="nav_principal_menu">
+            <input type="button" value="Consumo e Produção">
+
+            <input type="button" value="Relatórios">
+
+            <input type="button" value="Painéis">
+
+            <input type="button" value="Gestão Energética">
+
+    </nav>
+
+
+
+    <section class="relatorios" id="reports_menu">
+
+        <div class="conteiner_menu_reports">
+            <h2>RELATÓRIOS</h2>
+
+            <div class="continer_options_reports">
+                <div class="production_tab">
+                    <h3>Produção:</h3>
+                    <input type="button" value="Setores">
+                    <input type="button" value="Painéis">
+                </div>
+                <div class="consumptio_tab">
+                    <h3>Consumo:</h3>
+                    <input type="button" value="Setores">
+                    <input type="button" value="Individuais">
+                </div>
+            </div>
+
+
+            <div class="continer_graphics_reports">
+                <div class="conteiner_list_sectors">
+                    <ul>
+                        <li class="alfa_sector_graph">Setor Alfa</li>
+                        <li class="bravo_sector_graph">Setor Bravo</li> 
+                        <li class="charlie_sector_graph">Setor Charlie</li>
+                        <li class="delta_sector_graph">Setor Delta</li>
+                        <li class="echo_sector_graph">Setor Echo</li>
+                    </ul>
+
+                    <!-- aqui deve ficar os graficos -->
+                </div>
+            </div>
+
+
+        </div>
+        
+    </section>
+
+
+    <section class="paineis" id="panels_menu">
+
+        <div class="conteiner_menu_panels"> 
+                
+            <h2>PAINÉIS</h2>
+
+            <nav class="nav_buttons_panels">
+                <input type="button" value="Setor Alfa">
+                <input type="button" value="Setor Bravo">
+                <input type="button" value="Setor Charlie">
+                <input type="button" value="Setor Delta">
+                <input type="button" value="Setor Echo">
+            </nav>
+
+        </div>
+
+        <div class="panel_solar_panel">
+            
+            <div class="status_panel_solar">
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+           
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+              
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <div class="solar_panel"></div>
+                <hr>
+            </div>
+              <div class="report_pannels">
+                    <h4>Setor Correspondente</h4>
+                    <br>
+                    <hr>
+                    <h5>Produção: <span class="span_production_panel"></span> </h5>
+                    <hr>
+                    <h5>Eficiência: <span class="span_efic_panel"></span></h5>
+                    <hr>
+                    <h5>Porcentagem: <span class="span_porcent_panel"></span></h5>
+                    <hr>
+                </div>
+        </div>
+        
+    </section>
+
+
+    
+    <section class="gestao_energetica" id="energetic_management">
+
+        <div class="conteiner_menu_management_energetic">
+
+                <h2>Gestão Energética</h2>
+
+            <nav class="conteiner_input_buttons">
+                <input type="button" value="Análise Preventiva">
+                <input type="button" value="Energia Backup">
+                <input type="button" value="Controle de fornecimento">
+                <input type="button" value="Envio de contas">
+            </nav>
+
+
+            <div class="conteiner_informs">
+                <h3>Titulo</h3>
+<!-- =================================================================================================================== -->
+                <div class="conteiner_informs_energ">
+                        <div class="infor_grafics_energy_control">
+
+                        </div>
+
+                        <div class="infor_tec_control_forn">
+                            <h4> Suprimento energético</h4>
+                            <div class="grafs_and_input_sector_supply_energ">
+                               
+                
+                                <div class="inputs_supply_energ">
+                                    <input type="button" value="SETOR ALFA" class="supply_energ_input">
+                                    <input type="button" value="SETOR BRAVO" class="supply_energ_input">
+                                    <input type="button" value="SETOR CHARLIE" class="supply_energ_input">
+                                    <input type="button" value="SETOR DELTA" class="supply_energ_input">   
+                                    <input type="button" value="SETOR ECHO" class="supply_energ_input">
+                                </div>
+
+
+                                <div class="infor_specific_sector">
+                                    <h5>SETOR: </h5>
+                                
+                                    <div class="graf_supply_and_consum">
+
+                                    </div>
+
+                                    <div class="management_supply_energy">
+                                        <input type="button" value="Cortar Suprimento" class="management_supply_button">
+                                        <input type="button" value="Aumentar Suprimento" class="management_supply_button">
+                                    </div>
+                                    
+                                    
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                </div>
+<!-- =================================================================================================================== -->
+                                                                                <!-- 
+                                                                                    acima a opção de gestão energética: Controle de fornecimento
+                                                                                -->
+
+
+<!-- =================================================================================================================== -->
+                        
+
+
+<!-- =================================================================================================================== -->
+
+
+        </div>
+    </section>
+
+</body>
+</html>

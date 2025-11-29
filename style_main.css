@@ -1,0 +1,404 @@
+body{
+    width: 98vw;
+    height: 100vh;
+    margin: 0%;
+}
+
+.head_system{
+    width: 100vw;
+    height:auto;
+    background-color: #EEAC03;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+}
+
+.user_identification{   
+    width: 16em;
+    height: 38em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    border-radius: 5em;
+    margin-left: 2em;
+    position:fixed;
+    top: 1em;
+    z-index: -1;
+    
+    h3{
+        align-items: start;
+    }
+
+    input[type="text"]{
+        height: 2em;
+        width: 14.1em;
+        border: 1px solid black;
+        border-radius: 5em;
+    }
+}
+
+.nav_principal_menu{
+
+    margin-left: 20%;
+    display: none;
+    width: 75vw;
+    height: 25vh;
+    grid-template-columns: 25% 25% 25% 25%;
+    justify-items: center;
+    margin-top: 5.6em;
+
+    
+    input[type="button"]{
+        display: grid;
+        background-image: linear-gradient(143deg, #F56B07 60%, #8F3F04 100%);
+        border-radius: 1em;
+        height: 6em;
+        width: 12em;
+        padding: 0.5rem;
+        color: white;
+        cursor: pointer;
+        border: 0px;
+        transition-duration: 0.3s;
+    }
+
+     input[type="button"]:hover{
+        background-image: linear-gradient(143deg, #F56B07 60%, #8F3F04 100%);
+        border-radius: 1em;
+        height: 7em;
+        width: 13em;
+        padding: 0.5rem;
+        color: white;
+        cursor: pointer;
+        border: 0px;
+        transition-duration: 0.3s;
+     }
+
+}
+
+
+.relatorios{
+    display: none;
+    margin-top: 10%;
+    margin-left: 20%;
+    text-align: center;
+       
+      
+
+    .continer_options_reports{
+        display: flex;
+        flex-direction: column;
+        width: 75vw;
+        gap: 5em;
+        text-align: start;
+        justify-items: start;
+
+        .production_tab{
+            width: 100%;
+            height: 50%;
+            display: grid;
+            grid-template-columns:repeat(4, 0.23fr);
+           
+        }
+
+
+        .consumptio_tab{
+            width: 100%;
+            height: 50%;
+            display: grid;
+            grid-template-columns:repeat(4, 0.23fr);
+        }
+        
+     input[type="button"]{
+            margin-top: 1em;
+            margin-left: 55%;
+            width: 10em;
+            height: 3em;
+            border: 1px solid black;
+            background-color: #d9d9d900;
+            border-radius: 1em;
+            cursor: pointer;
+            transition-duration: 0.3s;
+            justify-content:start;
+
+            &:hover{
+                width: 10.2em;
+                height: 3.2em;
+            }
+        }
+
+        h3{
+            text-align: start;
+        }
+    }
+
+    .continer_graphics_reports{
+        display: none;
+        width: 75vw;
+        height: 90vh;
+        margin-bottom: 10%;
+        background-color: #d9d9d9;
+
+        .conteiner_list_sectors{
+            display: flex;
+            text-align: center;
+            font-size:large;
+            width: 20%;
+            height: 100%;
+           
+
+            ul{
+                 list-style-type: none;
+                 margin-top: 3em;
+
+                 li{
+                   margin-top: 3em;
+                   cursor: pointer;
+                    transition-duration: 0.2s; 
+
+                 }
+
+                 li:hover{
+                    border: 0.5px solid black;
+                    border-radius: 1em;
+                    transition-duration: 0.2s;
+                 }
+            }
+        }
+    }
+
+}
+
+
+.paineis{
+    display: none;
+    margin-top: 10%;
+
+    .conteiner_menu_panels{
+        width: 75vw;
+        margin-left: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+
+
+        .nav_buttons_panels{
+            display: flex;
+            justify-content: space-evenly;
+            width: 75vw;
+        }
+
+
+        input[type="button"]{
+            margin-top: 1em;
+            width: 10em;
+            height: 3em;
+            border: 1px solid black;
+            background-color: #d9d9d900;
+            border-radius: 1em;
+            cursor: pointer;
+            transition-duration: 0.3s;
+        }
+            input[type="button"]:hover{
+            width: 10.2em;
+            height: 3.2em;
+            border: 1px solid black;
+            background-color: #d9d9d900;
+            border-radius: 1em;
+            cursor: pointer;
+            transition-duration: 0.3s;
+        }
+
+    } 
+
+    .panel_solar_panel{
+        display: grid;
+        margin-top: 10%;
+        margin-left: 9%;
+        grid-template-columns: 60% 40%;
+        gap: 2em;
+        
+        .status_panel_solar{
+            display: grid;
+            width: 75vw;
+            height: 75vh;
+            margin-left: 20%;
+            grid-template-columns: repeat(4, 0.2fr);
+            gap: 1em;
+            padding: 1em;
+            background-color: #d9d9d9;
+            border-radius: 1em;
+
+            .solar_panel{
+                width: 8em;
+                height: 8em;
+                aspect-ratio: 1 / 1;
+                border: 1px solid black;
+                background-color: #fff;
+                border-radius: 1em;
+            }
+        }
+
+
+        .report_pannels{
+            display: flex;
+            flex-direction: column;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-left: 40%;
+            background-color: white;
+            width: 40%;
+            height: 80%;
+            padding: 1em;
+            border-radius: 1em;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+            hr{
+                width: 100%;
+                border: 1px solid black;
+            }
+
+            h4{
+                text-align: center;
+            }
+        }         
+ 
+    }
+    
+}
+
+
+.gestao_energetica{
+    display: block;
+    margin-top: 10%;
+    margin-left: 20%;
+    text-align: center;
+
+    .conteiner_menu_management_energetic{
+        width: 75vw;
+        gap: 5em;
+        input[type="button"]{
+            width: 13em;
+            height: 3em;
+            border-radius: 1em;
+            border: solid 1px black;
+            background-color: #d9d9d900;
+            text-align: center;
+            cursor: pointer;
+            transition-duration: 0.3s;
+            
+              &:hover{
+                width: 13.2em;
+                height: 3.2em;
+                transition-duration: 0.3s;
+            }
+        }
+    }
+/*========================================================================================================================*/
+    .conteiner_informs{
+        display: block;
+        width: 100%;
+        height: 75vh;
+        background-color: #D9D9D9;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 1em;
+        margin-top: 5%;
+        gap: 1rem;
+        overflow: auto;
+        scrollbar-width: none;
+        padding-bottom: 1em;
+
+        .conteiner_informs_energ{
+            display: grid;
+            grid-template-columns: 40% 60%;
+            width: 100%;
+            height: 90%;
+            justify-items: center;
+
+            .infor_grafics{
+                width: 80%;
+                height: 100%;
+            }
+
+            .infor_tec_control_forn{
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: #fff;
+                width: 90%;
+                max-height: 100%;
+                height: auto;
+                border-radius: 1em;
+                border: 1px solid black;
+
+                .report_sector_supply{
+                    display: flex;
+                    justify-content: space-around;
+                    margin-top: 10%;
+                    margin-bottom: 10%;
+                    width: 100%;
+                    height: 90%;
+
+
+                    .inputs_supply_energ{
+                    
+                        justify-items: center;
+                        align-items: center;
+                        width: 30%;
+                        height: 100%;
+                        display: grid;
+
+                        .supply_energ_input{
+                            width: 9em;
+                            height: 1.5em;
+                            font-size: smaller;
+                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                        }
+                    }
+
+
+                    .infor_specific_sector{
+                        display: grid;
+                        background-color: rgb(255, 255, 255);
+                        width: 60%;
+                        height: 100%;
+                        border: 1px solid black;
+                        border-radius: 2em;
+
+                    }
+
+                    .infor_specific_sector{
+
+
+                        .management_supply_energy{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            max-width: 100%;
+                            max-height: 40%;
+                            align-items: center;
+                        
+                            
+                            .enable_disable_backup{
+                                display: none;
+                                margin: 0.2em;
+                                width: 12em;
+                                height: 1.5em;
+                                font-size: smaller;
+
+                                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
