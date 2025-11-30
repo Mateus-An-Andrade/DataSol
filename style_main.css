@@ -324,6 +324,7 @@ body{
             
 
             .infor_grafics{
+                display: none;
                 background-color: #8F3F04;
                 width: 80%;
                 height: 100%;
@@ -437,7 +438,76 @@ body{
             }
 
 /* ====================================================================================================================== */
+            .to_push_invoice{
+                display: block;
+                background-color: #fff;
+                width: 80%;
+                margin: 0 10%;
 
+
+                .conteiner_buttons_to_push{
+                    width: 80%;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10%;
+                    align-content: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    margin-top: 2em;
+                    font-size: 1.4rem;
+
+                    .to_push_coletive,
+                    .to_push_unic{
+                        border: 0px solid black;
+                        transition-duration: 0.3s;
+                        font-size: 1rem;
+                        
+                        &&:hover{
+                            border-bottom: 1px solid black;
+                            transition-duration: 0.3s;
+                        }
+                    }
+                }
+
+                .conteiner_infor_resident{
+                    display: flex;
+                    flex-direction: column;
+                    width: 50%;
+                    max-height: 75%;
+                    border: 1px solid black;
+                    border-radius: 1em;
+                    margin: 0 auto;
+                    margin-top: 1em;
+                    gap: 1em;
+                    padding: 1em;
+                    
+                    input[type="text"]{
+                        width: 100%;
+                        height: 1.5em;
+                        margin:0 auto;
+                        text-align: left;
+                        border: 1px solid black;
+                        border-radius: 1em;
+                        align-items: center;
+                    }
+
+                    label{
+                        text-align: left;
+                    }
+
+                    .conteiner_confirm_cancel_to_push{
+                        width: 100%;
+                        
+                        .confirme_to_push,
+                        .cancel_to_push{
+                            width: auto;
+                            height: auto;
+                            
+                        }
+                    }
+                }
+            }   
         }
     }
 }
