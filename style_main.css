@@ -439,7 +439,7 @@ body{
 
 /* ====================================================================================================================== */
             .to_push_invoice{
-                display: block;
+                display: none;
                 background-color: #fff;
                 width: 80%;
                 margin: 0 10%;
@@ -507,7 +507,22 @@ body{
                         }
                     }
                 }
-            }   
+            }
+            
+            .preventive_analysis{
+                display: block;
+                width: 19em;
+                height: 15em;
+                padding: 1em;
+                border: 1px solid black;
+                border-radius: 1em;
+                background-color: #ffffff;
+                text-align: left;
+
+                h4{
+                    text-align: center;
+                }
+            }
         }
     }
 }
