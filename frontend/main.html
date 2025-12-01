@@ -23,21 +23,24 @@
 
     </div>
 
-    <nav class="nav_principal_menu">
-            <input type="button" value="Consumo e Produção">
+    <nav class="nav_principal_menu" id="nav_principal_menu">
+            <input type="button" value="Consumo e Produção" id="data_prod_cons_btn">
 
-            <input type="button" value="Relatórios">
+            <input type="button" value="Relatórios" id="data_reports_btn">
 
-            <input type="button" value="Painéis">
+            <input type="button" value="Painéis" id="data_panels_btn">
 
-            <input type="button" value="Gestão Energética">
+            <input type="button" value="Gestão Energética" id="management_energ_btn">
 
     </nav>
 
 
     <section class="production_and_consumption" id="production_and_consumption_menu">
-        <h2>Consumo e Produção</h2>
-
+        <div class="head_menu_production_and_consumption">
+            <h2>Consumo e Produção</h2>             
+            <img src="/frontend/icons/close.png" alt="icone_de_fechar_janela" class="close_windows">
+        </div>
+        
         <div class="conteiner_production">
             <h3>Produção:</h3>
                 <input type="button" value="Potencial">
@@ -64,8 +67,11 @@
     <section class="relatorios" id="reports_menu">
 
         <div class="conteiner_menu_reports">
-            <h2>RELATÓRIOS</h2>
-
+            <div class="head_menu_reports">
+                <h2>RELATÓRIOS</h2>
+                <img src="/frontend/icons/close.png" alt="icone_de_fechar_janela" class="close_windows">
+            </div>
+            
             <div class="continer_options_reports">
                 <div class="production_tab">
                     <h3>Produção:</h3>
@@ -104,9 +110,11 @@
     <section class="paineis" id="panels_menu">
 
         <div class="conteiner_menu_panels"> 
-                
-            <h2>PAINÉIS</h2>
-
+            <div class="head_panels_menu">
+                <h2>PAINÉIS</h2>
+                <img src="/frontend/icons/close.png" alt="icone_de_fechar_janela" class="close_windows">
+            </div>
+      
             <nav class="nav_buttons_panels">
                 <input type="button" value="Setor Alfa">
                 <input type="button" value="Setor Bravo">
@@ -157,8 +165,11 @@
     <section class="gestao_energetica" id="energetic_management">
 
         <div class="conteiner_menu_management_energetic">
-
-                <h2>Gestão Energética</h2>
+            <div class="head_menu_management_energetic">
+                <h2>Gestão Energética</h2>  
+                <img src="/frontend/icons/close.png" alt="icone_de_fechar_janela" class="close_windows">
+            </div>
+                
 
             <nav class="conteiner_input_buttons">
                 <input type="button" value="Análise Preventiva">
@@ -288,5 +299,7 @@
         </div>
     </section>
 
+
+    <script src="script.js"></script>
 </body>
 </html>
