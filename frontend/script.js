@@ -50,7 +50,9 @@ function opacity_btns(class_btn,id_menu){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    open_menu("data_prod_cons_btn","production_and_consumption_menu", "grid")
+
+//==================================================================================================================================================
+    {open_menu("data_prod_cons_btn","production_and_consumption_menu", "grid")
         opacity_btns("btn_prod_consump_container", "conteiner_production")
         open_inner_option("potential_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")
         open_inner_option("util_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")
@@ -60,7 +62,38 @@ document.addEventListener("DOMContentLoaded", function () {
         open_inner_option("consumpt_for_sectors_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
         open_inner_option("consumpt_for_resident_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
 
+                                                                                                //Acima estão as funçoes do menu "Consumo e Produção", as funções somente abrem e escondem interfaces
+    }
+//==================================================================================================================================================
     open_menu("data_reports_btn","reports_menu", "block")
+        {open_inner_option("btn_reports_for_sectors","continer_graphics_and_sectors_reports", "grid")
+            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+
+        {open_inner_option("btn_reports_for_pannels", "continer_graphics_and_sectors_reports", "grid")
+            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+
+        {open_inner_option("btn_reports_for_sectors_consumption", "continer_graphics_and_sectors_reports", "grid")
+            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+
+        {open_inner_option("btn_reports_for_individuals_consumption", "continer_graphics_and_sectors_reports", "grid")
+            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
+            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+
     open_menu("data_panels_btn","panels_menu", "flex")
     open_menu("management_energ_btn","energetic_management", "block")
 

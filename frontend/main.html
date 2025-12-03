@@ -74,29 +74,32 @@
             <div class="continer_options_reports">
                 <div class="production_tab">
                     <h3>Produção:</h3>
-                    <input type="button" value="Setores">
-                    <input type="button" value="Painéis">
+                    <input type="button" value="Setores" id="btn_reports_for_sectors">
+                    <input type="button" value="Painéis" id="btn_reports_for_pannels">
                 </div>
                 <div class="consumptio_tab">
                     <h3>Consumo:</h3>
-                    <input type="button" value="Setores">
-                    <input type="button" value="Individuais">
+                    <input type="button" value="Setores" id="btn_reports_for_sectors_consumption">
+                    <input type="button" value="Individuais" id="btn_reports_for_individuals_consumption">
                 </div>
             </div>
 
 
-            <div class="continer_graphics_reports">
-                <div class="conteiner_list_sectors">
+            <div class="continer_graphics_and_sectors_reports" id="continer_graphics_and_sectors_reports">
+                <div class="conteiner_list_sectors" id="conteiner_list_sectors">
                     <ul>
-                        <li class="alfa_sector_graph">Setor Alfa</li>
-                        <li class="bravo_sector_graph">Setor Bravo</li> 
-                        <li class="charlie_sector_graph">Setor Charlie</li>
-                        <li class="delta_sector_graph">Setor Delta</li>
-                        <li class="echo_sector_graph">Setor Echo</li>
+                        <li class="alfa_sector_graph" id="alfa_sector_graph">Setor Alfa</li>
+                        <li class="bravo_sector_graph" id="bravo_sector_graph">Setor Bravo</li> 
+                        <li class="charlie_sector_graph" id="charlie_sector_graph">Setor Charlie</li>
+                        <li class="delta_sector_graph" id="delta_sector_graph">Setor Delta</li>
+                        <li class="echo_sector_graph" id="echo_sector_graph">Setor Echo</li>
                     </ul>
-
-                    <!-- aqui deve ficar os graficos -->
+                    
                 </div>
+
+                <div class="continer_graphics_reports" id="continer_graphics_reports"> 
+                    <!-- aqui deve ficar os graficos -->
+                 </div>
             </div>
 
 
