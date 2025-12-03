@@ -41,22 +41,21 @@
             <img src="/frontend/icons/close.png" alt="icone_de_fechar_janela" class="close_windows">
         </div>
         
-        <div class="conteiner_production">
+        <div class="conteiner_production" id="conteiner_production">
             <h3>Produção:</h3>
-                <input type="button" value="Potencial">
-                <input type="button" value="Útil">
-                <input type="button" value="Acumulada">
+                <input type="button" value="Potencial" class="btn_prod_consump_container" id="potential_btn_prod_energ">
+                <input type="button" value="Útil" class="btn_prod_consump_container" id="util_btn_prod_energ">
+                <input type="button" value="Acumulada" class="btn_prod_consump_container" id="total_btn_prod_energ">
+
+            <h3>Produção:</h3>
+                <input type="button" value="Total" class="btn_prod_consump_container" id="consumption_total_btn_energ_data">
+                <input type="button" value="Por setores"  class="btn_prod_consump_container" id="consumpt_for_sectors_btn_energ_data">
+                <input type="button" value="Por residência"  class="btn_prod_consump_container" id="consumpt_for_resident_btn_energ_data">
         </div>
 
-        <div class="conteiner_consumption">
-            <h3>Produção:</h3>
-                <input type="button" value="Total">
-                <input type="button" value="Por setores">
-                <input type="button" value="Por residência">
-        </div>
 
-
-        <div class="conteiner_data_analysis">
+        <div class="conteiner_data_analysis_consup_prod" id="conteiner_data_analysis_consup_prod">
+            <!-- graficos criados com base nos dados aqui -->
         </div> 
 
     </section>
@@ -182,7 +181,7 @@
             <div class="conteiner_informs">
                 <h3>Titulo</h3>
 
-                <div class="conteiner_informs_energ">  <!-- conteiner de multiplos dados -->
+                <div class="conteiner_informs_energ" >  <!-- conteiner de multiplos dados -->
                         <div class="infor_grafics">
 
                         </div>
