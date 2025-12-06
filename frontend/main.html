@@ -174,21 +174,26 @@
                 
 
             <nav class="conteiner_input_buttons">
-                <input type="button" value="Análise Preventiva">
-                <input type="button" value="Energia Backup">
-                <input type="button" value="Controle de fornecimento">
-                <input type="button" value="Envio de contas">
+                <input type="button" value="Análise Preventiva"
+                    class="inner_btn_management_energetic" id="preventive_analysis_btn">
+
+                <input type="button" value="Energia Backup" 
+                    class="inner_btn_management_energetic" id="backup_energy_btn">
+
+                <input type="button" value="Controle de fornecimento" 
+                    class="inner_btn_management_energetic" id="control_supply_btn">
+
+                <input type="button" value="Envio de contas" 
+                    class="inner_btn_management_energetic" id="sending_bills_btn">
             </nav>
 
 
-            <div class="conteiner_informs">
-                <h3>Titulo</h3>
 
                 <div class="conteiner_informs_energ" >  <!-- conteiner de multiplos dados -->
                         <div class="infor_grafics">
 
                         </div>
-
+                    <div class="conteiner_informs" id="conteiner_informs_tec_control_supply">
                         <div class="infor_tec_control_forn">
                             <h4> Suprimento energético</h4>
                             <div class="grafs_and_input_sector_supply_energ">
@@ -220,10 +225,18 @@
                                
                             </div>
                         </div>
+                    </div>
+
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética: Controle de fornecimento-->
+                <div class="conteiner_informs" id="conteiner_informs_supply_backup">
+                    <h3>Backup de energia</h3>
+                    
+                    <div class="infor_grafics" id="infor_grafics_for_backup">
 
-                    <div class="infor_backup_sectors">
+                        </div>
+
+                    <div class="infor_backup_sectors" id="sectors_infor_backups">
                         <h4> Suprimento energético</h4>
                         <div class="infor_supply_reports">
                             <hr>
@@ -240,10 +253,12 @@
 
                         </div>
                     </div>
+                </div>
+
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética: Energia Backup-->
 
-
+        <div class="conteiner_informs" id="conteiner_informs_supply_backup">
                 <div class="to_push_invoice">
 
                     <div class="conteiner_buttons_to_push">
@@ -275,11 +290,14 @@
 
                     </div>
 
-                </div>                
+                </div>
+        </div>
+                
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética: Envio de contas-->
-                
-                <div class="preventive_analysis">
+            <div class="conteiner_informs" id="conteiner_informs_preventive_analysis">
+                    <h3>Análise Preventiva</h3>
+                <div class="preventive_analysis" id="preventive_analysis_continer">
                     <h4>Setor: <span></span></h4>
                     <hr>
                     <h5>Total de painéis: <span></span> </h5>
@@ -288,6 +306,8 @@
                     <hr>
                     <h5>Total de painéis com anomalias: <span></span> </h5>
                 </div>
+            </div> 
+                
                 
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética:Análise Preventiva-->
@@ -298,7 +318,7 @@
 
             </div>
 
-        </div>
+
     </section>
 
 

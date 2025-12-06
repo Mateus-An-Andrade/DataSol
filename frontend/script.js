@@ -50,6 +50,18 @@ function opacity_btns(class_btn,id_menu){
     })
 }
 
+function show_card_panels(){
+        
+    const panels = document.querySelectorAll(".solar_panel");
+    const report = document.querySelector(".report_pannels");
+
+    panels.forEach(panel => {
+        panel.addEventListener("click", () => {
+            report.style.display = "block"; // aparece
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
 //==================================================================================================================================================
@@ -93,23 +105,34 @@ document.addEventListener("DOMContentLoaded", function () {
             open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
             open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
             open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}}
+            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
 
                                                                                                  //Acima estão as funçoes do menu "Relatórios", as funções somente abrem e escondem interfaces
+        }
 //==================================================================================================================================================
     {open_menu("data_panels_btn","panels_menu", "block")
+            opacity_btns("btn_panel_reports","panels_menu")
             open_inner_option("alfa_sector_panel_btn", "panel_solar_container_reports", "grid")
-                
-                
             open_inner_option("bravo_sector_panel_btn", "panel_solar_container_reports", "grid")
             open_inner_option("charlie_sector_panel_btn", "panel_solar_container_reports", "grid")
             open_inner_option("delta_sector_panel_btn", "panel_solar_container_reports", "grid")
-            open_inner_option("echo_sector_panel_btn", "panel_solar_container_reports", "grid")}
+            open_inner_option("echo_sector_panel_btn", "panel_solar_container_reports", "grid")
+            opacity_btns("solar_panel","panels_menu")
+            show_card_panels()
 
                                                                                                 //Acima está o menu de relátórios de painéis, aonde mostrará quanto de energia tá sendo produzida cada painel e o status de produção, ou seja, se está 100% ou não.
+    }
 
 //==================================================================================================================================================                                                                                                
-    open_menu("management_energ_btn","energetic_management", "block")
+    {open_menu("management_energ_btn","energetic_management", "block")
+        opacity_btns("inner_btn_management_energetic", "energetic_management")
+            open_inner_option("preventive_analysis_btn", "conteiner_informs_preventive_analysis", "block")
+            open_inner_option("preventive_analysis_btn", "preventive_analysis_continer", "block")
+
+            open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "flex")
+            open_inner_option("backup_energy_btn", "sectors_infor_backups", "block")
+            open_inner_option("backup_energy_btn", "infor_grafics_for_backup", "block")
+    }
 
     close_menu("production_and_consumption_menu")
     close_menu("reports_menu")
