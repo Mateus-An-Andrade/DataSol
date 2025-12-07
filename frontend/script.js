@@ -126,10 +126,17 @@ document.addEventListener("DOMContentLoaded", function () {
 //==================================================================================================================================================                                                                                                
     {open_menu("management_energ_btn","energetic_management", "block")
         opacity_btns("inner_btn_management_energetic", "energetic_management")
-            open_inner_option("preventive_analysis_btn", "conteiner_informs_preventive_analysis", "block")
+
+            open_inner_option("preventive_analysis_btn", "conteiner_informs_preventive_analysis", "grid")
             open_inner_option("preventive_analysis_btn", "preventive_analysis_continer", "block")
 
-            open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "flex")
+            open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "block")
+            open_inner_option("backup_energy_btn","conteiner_graph_and_tec_card", "flex")
+
+
+            open_inner_option("control_supply_btn","conteiner_informs_tec_control_supply", "flex") 
+            open_inner_option("control_supply_btn","conteiner_informs_energ", "flex")
+
             open_inner_option("backup_energy_btn", "sectors_infor_backups", "block")
             open_inner_option("backup_energy_btn", "infor_grafics_for_backup", "block")
     }

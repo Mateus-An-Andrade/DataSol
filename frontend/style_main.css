@@ -376,6 +376,9 @@ body{
     .conteiner_menu_management_energetic{
         width: 75vw;
         gap: 5em;
+
+    }
+
         input[type="button"]{
             width: 13em;
             height: 3em;
@@ -392,8 +395,6 @@ body{
                 transition-duration: 0.3s;
             }
         }
-    }
-
     .conteiner_informs{
         display: none;
         width: 100%;
@@ -406,18 +407,10 @@ body{
         overflow: auto;
         scrollbar-width: none;
         padding: 1em;
-
-        .conteiner_informs_energ{
-            display: grid;
-            grid-template-columns: 40% 60%;
-            width: 100%;
-            height: 90%;
-            justify-items: center;
-            background-color: #8F3F04;
-            
+    }
 
             .infor_tec_control_forn{
-                display: none;
+                display: flex;
                 flex-direction: column;
                 align-items: center;
                 background-color: #ffffff;
@@ -562,17 +555,32 @@ body{
             }
             
         }
-    }
+    
 
         .infor_grafics{
-            display: none;
+            display: flex;
             background-color: #8F3F04;
-            width: 80%;
-            height: 100%;
+            width: 60%;
+            height: 90%;
+        }
+
+        .conteiner_graph_and_tec_card{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+            width: 100%;
+            height: 100%; 
+        }
+
+        #conteiner_informs_supply_backup {
+            display: none;
+            flex-direction: column; 
+            gap: 1rem;
         }
 
         .infor_backup_sectors{
-                display: none;
+                display: none; 
                 background-color: #ffffff;
                 width: 30%;
                 max-height: 80%;
@@ -590,20 +598,24 @@ body{
                     padding: 1em;
                 }
 
-                .input_conteiner_management_backup{
+                  .input_conteiner_management_backup{
                     width: 100%;
                     display: flex;
                     justify-content: center;
+                }
 
-                    .input_management_backup{
+                 .input_management_backup{
                         margin-top: 10%;
                         width: 9em;
                         height: 1.5em;
                         font-size: smaller;
+                        border-radius: 1em;
+                        border: 1px solid black;
                         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                        cursor: pointer;
 
                 }
-            }
+
         }
          .preventive_analysis{
                 display: none;
@@ -619,4 +631,4 @@ body{
                     text-align: center;
                 }
     }
-}
+
