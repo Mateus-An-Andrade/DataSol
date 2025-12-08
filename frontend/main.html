@@ -189,44 +189,50 @@
 
 
 
-                <div class="conteiner_informs_energ" id="conteiner_informs_energ" >  <!-- conteiner de multiplos dados -->
+                <div class="conteiner_informs" id="conteiner_informs_energ" >  <!-- conteiner de multiplos dados -->
+                    <h3>Fornecimento energético</h3>
+                    <div class="inner_conteiner_display_control_energ" id="inner_conteiner_display_control_energ">
+
                         <div class="infor_grafics">
 
                         </div>
 
-                    <div class="conteiner_informs" id="conteiner_informs_tec_control_supply">
-                        <div class="infor_tec_control_forn">
-                            <h4> Suprimento energético</h4>
-                            <div class="grafs_and_input_sector_supply_energ">
-                               
-                
-                                <div class="inputs_supply_energ">
-                                    <input type="button" value="SETOR ALFA" class="supply_energ_input">
-                                    <input type="button" value="SETOR BRAVO" class="supply_energ_input">
-                                    <input type="button" value="SETOR CHARLIE" class="supply_energ_input">
-                                    <input type="button" value="SETOR DELTA" class="supply_energ_input">   
-                                    <input type="button" value="SETOR ECHO" class="supply_energ_input">
-                                </div>
-
-
-                                <div class="infor_specific_sector">
-                                    <h5>SETOR: </h5>
+                        <div class="conteiner_informs" id="conteiner_informs_tec_control_supply">
+                            <div class="infor_tec_control_forn">
+                                <h4> Suprimento energético</h4>
+                                <div class="grafs_and_input_sector_supply_energ">
                                 
-                                    <div class="graf_supply_and_consum">
-
+                    
+                                    <div class="inputs_supply_energ">
+                                        <input type="button" value="SETOR ALFA" class="supply_energ_input">
+                                        <input type="button" value="SETOR BRAVO" class="supply_energ_input">
+                                        <input type="button" value="SETOR CHARLIE" class="supply_energ_input">
+                                        <input type="button" value="SETOR DELTA" class="supply_energ_input">   
+                                        <input type="button" value="SETOR ECHO" class="supply_energ_input">
                                     </div>
 
-                                    <div class="management_supply_energy">
-                                        <input type="button" value="Cortar Suprimento" class="management_supply_button">
-                                        <input type="button" value="Aumentar Suprimento" class="management_supply_button">
+
+                                    <div class="infor_specific_sector">
+                                        <h5>SETOR: </h5>
+                                    
+                                        <div class="graf_supply_and_consum">
+
+                                        </div>
+
+                                        <div class="management_supply_energy">
+                                            <input type="button" value="Cortar Suprimento" class="management_supply_button">
+                                            <input type="button" value="Aumentar Suprimento" class="management_supply_button">
+                                        </div>
+                                        
+                                        
                                     </div>
-                                    
-                                    
+                                
                                 </div>
-                               
                             </div>
                         </div>
                     </div>
+
+                </div>
 
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética: Controle de fornecimento-->
@@ -264,15 +270,16 @@
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética: Energia Backup-->
 
-        <div class="conteiner_informs" id="hhh">
-                <div class="to_push_invoice">
+        <div class="conteiner_informs" id="conteiner_informs_energ_sending_bills">
+                <h3>Envio de faturas</h3>
+                <div class="to_push_invoice" id="to_push_invoice">
 
                     <div class="conteiner_buttons_to_push">
-                        <input type="button" value="Envio Coletivo" class="to_push_coletive">
-                        <input type="button" value="Envio Especifico" class="to_push_unic">
+                        <input type="button" value="Envio Coletivo" class="to_push_coletive" id="to_push_coletive">
+                        <input type="button" value="Envio Especifico" class="to_push_unic" id="to_push_unic">
                     </div>
 
-                    <div class="conteiner_infor_resident">
+                    <div class="conteiner_infor_resident" id="conteiner_infor_resident">
                         <h5>Dados do morador:</h5>
                         <label for="id"> identificação:
                              <br>
@@ -318,7 +325,7 @@
 <!-- =================================================================================================================== -->
         <!-- acima a opção de gestão energética:Análise Preventiva-->
 
-                </div>
+               
 
 
 

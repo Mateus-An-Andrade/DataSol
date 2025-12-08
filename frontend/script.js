@@ -133,12 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
             open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "block")
             open_inner_option("backup_energy_btn","conteiner_graph_and_tec_card", "flex")
 
+            open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
+            open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "flex")
 
-            open_inner_option("control_supply_btn","conteiner_informs_tec_control_supply", "flex") 
-            open_inner_option("control_supply_btn","conteiner_informs_energ", "flex")
-
-            open_inner_option("backup_energy_btn", "sectors_infor_backups", "block")
-            open_inner_option("backup_energy_btn", "infor_grafics_for_backup", "block")
+            open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
+            open_inner_option("sending_bills_btn", "to_push_invoice", "block")
+            open_inner_option("to_push_unic", "conteiner_infor_resident", "flex")
     }
 
     close_menu("production_and_consumption_menu")

@@ -371,6 +371,7 @@ body{
         display: grid;
         grid-template-columns: 90% 10%;
         align-items: center;
+        justify-items: center;
     }
 
     .conteiner_menu_management_energetic{
@@ -388,6 +389,7 @@ body{
             text-align: center;
             cursor: pointer;
             transition-duration: 0.3s;
+            margin-left: 5em;
             
               &:hover{
                 width: 13.2em;
@@ -487,6 +489,7 @@ body{
                 display: none;
                 background-color: #fff;
                 width: 80%;
+                height: 90%;
                 margin: 0 10%;
 
 
@@ -516,7 +519,7 @@ body{
                 }
 
                 .conteiner_infor_resident{
-                    display: flex;
+                    display: none;
                     flex-direction: column;
                     width: 50%;
                     max-height: 75%;
@@ -630,5 +633,15 @@ body{
                 h4{
                     text-align: center;
                 }
+
+    }
+
+    .inner_conteiner_display_control_energ{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        width: 100%;
+        height: 100%; 
     }
 
