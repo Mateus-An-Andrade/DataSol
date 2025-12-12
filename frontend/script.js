@@ -1,3 +1,4 @@
+
 function open_menu(id_btn,id_menu, displayType = "grid"){
     const button_menu = document.getElementById(id_btn)
     const menu_in_work = document.getElementById(id_menu)
@@ -62,18 +63,49 @@ function show_card_panels(){
     });
 }
 
+function make_data_graph(id_canvas, data){
+    const conteiner = document.getElementById(id_canvas);
+
+    new Chart(conteiner, {
+        type: "bar",
+        data: {
+            labels: data.horas,
+            datasets: [{
+                label: "Produção potencial (kWh)",
+                data: data.valores,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: "#031626",           // borda (opcional)
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function production_potential(){
+    const btn_produ_pot = document.getElementById("potential_btn_prod_energ")
+
+    btn_produ_pot.addEventListener("click",function(){
+        fetch("http://127.0.0.1:5000/production_potential")
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);  // só para ver no console
+            make_data_graph("conteiner_data_analysis_consup_prod", data);
+        })
+    })   
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
 //==================================================================================================================================================
     {open_menu("data_prod_cons_btn","production_and_consumption_menu", "grid")
         opacity_btns("btn_prod_consump_container", "conteiner_production")
         open_inner_option("potential_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")
-        open_inner_option("util_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")
-        open_inner_option("total_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")
+            production_potential()
 
         open_inner_option("consumption_total_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
-        open_inner_option("consumpt_for_sectors_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
-        open_inner_option("consumpt_for_resident_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
+
+        open_inner_option("production_for_sectors_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
 
                                                                                                 //Acima estão as funçoes do menu "Consumo e Produção", as funções somente abrem e escondem interfaces
     }

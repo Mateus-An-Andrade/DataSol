@@ -42,21 +42,18 @@
         </div>
         
         <div class="conteiner_production" id="conteiner_production">
-            <h3>Produção:</h3>
-                <input type="button" value="Potencial" class="btn_prod_consump_container" id="potential_btn_prod_energ">
-                <input type="button" value="Útil" class="btn_prod_consump_container" id="util_btn_prod_energ">
-                <input type="button" value="Acumulada" class="btn_prod_consump_container" id="total_btn_prod_energ">
+                <button class="btn_prod_consump_container" id="potential_btn_prod_energ">Produção</button>
 
-            <h3>Produção:</h3>
-                <input type="button" value="Total" class="btn_prod_consump_container" id="consumption_total_btn_energ_data">
-                <input type="button" value="Por setores"  class="btn_prod_consump_container" id="consumpt_for_sectors_btn_energ_data">
-                <input type="button" value="Por residência"  class="btn_prod_consump_container" id="consumpt_for_resident_btn_energ_data">
+                <button class="btn_prod_consump_container" id="consumption_total_btn_energ_data">Consumo</button>
+
+                <button class="btn_prod_consump_container" id="production_for_sectors_btn_energ_data"> setores</button>
+
         </div>
 
 
-        <div class="conteiner_data_analysis_consup_prod" id="conteiner_data_analysis_consup_prod">
+        <canvas class="conteiner_data_analysis_consup_prod" id="conteiner_data_analysis_consup_prod">
             <!-- graficos criados com base nos dados aqui -->
-        </div> 
+        </canvas> 
 
     </section>
 
@@ -336,5 +333,7 @@
 
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </body>
 </html>
