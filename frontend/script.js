@@ -63,22 +63,65 @@ function show_card_panels(){
     });
 }
 
-function make_data_graph(id_canvas, data){
+function make_data_graph(id_canvas, data, type){
     const conteiner = document.getElementById(id_canvas);
 
-    new Chart(conteiner, {
-        type: "bar",
-        data: {
+    if(type === "production"){
+        new Chart(conteiner, {
+            type: "bar",
+            data: {
+                labels: data.horas,
+                datasets: [{
+                    label: "Produção potencial (kWh)",
+                    data: data.valores,
+                    backgroundColor: '#1EA91B',
+                    borderColor: "#031626",      
+                    borderWidth: 1
+                }]
+            }
+        });
+    }else if(type === "consumption"){
+                new Chart(conteiner, {
+                type: "line",
+                data: {
+                    labels: data.horas,
+                    datasets: [{
+                        label: "Consumo Total(kWh)",
+                        data: data.valores,
+                        backgroundColor: '#C40B0B',
+                        borderColor: "#031626",      
+                        borderWidth: 1
+                }]
+            }
+        });
+
+    }else if(type === "consumptionVSproduction"){
+        new Chart(conteiner, {
+            data: {
             labels: data.horas,
-            datasets: [{
-                label: "Produção potencial (kWh)",
-                data: data.valores,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: "#031626",           // borda (opcional)
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    type: "bar",
+                    label: "Produção (kWh)",
+                    data: data.producao,
+                    backgroundColor: "#1EA91B",
+                    borderColor: "#1EA91B",
+                    borderWidth: 1
+                },
+                {
+                    type: "line",
+                    label: "Consumo (kWh)",
+                    data: data.consumo,
+                    borderColor: "#C40B0B",
+                    backgroundColor: "#C40B0B",
+                    borderWidth: 2,
+                    tension: 0.3
+                }
+            ]
         }
     });
+
+ }
 }
 
 function production_potential(){
@@ -88,10 +131,38 @@ function production_potential(){
         fetch("http://127.0.0.1:5000/production_potential")
         .then(response => response.json())
         .then(data =>{
-            console.log(data);  // só para ver no console
-            make_data_graph("conteiner_data_analysis_consup_prod", data);
+            console.log("dados de produção:",data);  // só para ver no console
+            make_data_graph("conteiner_data_analysis_consup_prod", data, "production");
         })
     })   
+}
+
+function consumption_daily(){
+    const btn_consup_daily = document.getElementById("consumption_total_btn_energ_data")
+
+    btn_consup_daily.addEventListener("click",function(){
+
+        fetch("http://127.0.0.1:5000/consumption_daily")
+        .then(response => response.json())
+        .then(data =>{
+            console.log("dados de consumo:", data);
+            make_data_graph("conteiner_data_analysis_consup_prod", data, "consumption")
+        })
+    })
+}
+
+function consumptionVSproduction(){
+    const btn_consup_vs_production = document.getElementById("production_and_consumption_togheter")
+
+    btn_consup_vs_production.addEventListener("click",function(){
+
+        fetch("http://127.0.0.1:5000/consumption_vs_production")
+        .then(response => response.json())
+        .then(data =>{
+            console.log("dados de consumo e produção:", data);
+            make_data_graph("conteiner_data_analysis_consup_prod", data, "consumptionVSproduction")
+        })
+    })
 }
 
 
@@ -104,9 +175,10 @@ document.addEventListener("DOMContentLoaded", function () {
             production_potential()
 
         open_inner_option("consumption_total_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
+            consumption_daily()
 
-        open_inner_option("production_for_sectors_btn_energ_data", "conteiner_data_analysis_consup_prod", "grid")
-
+        open_inner_option("production_and_consumption_togheter", "conteiner_data_analysis_consup_prod", "grid")
+            consumptionVSproduction()
                                                                                                 //Acima estão as funçoes do menu "Consumo e Produção", as funções somente abrem e escondem interfaces
     }
 //==================================================================================================================================================
