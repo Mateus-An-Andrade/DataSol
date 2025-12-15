@@ -104,6 +104,51 @@ def consumption_vs_production():
 
 #===========================================================================================================================
 
+@app.route("/report_production_menu", methods=["POST"])
+def report_production_menu():
+
+    if request.method == 'POST':
+        data_report = request.get_json()
+        sector_report = data_report.get("btn_report")
+
+
+        production = production_potential()
+        total_production = round(sum(production["valores"]), 2)
+
+
+        if sector_report == "SECTORS":
+
+            sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
+
+            percentages = []
+            remaining = 1.0
+
+            for i in range(len(sectors) - 1):
+                value = round(random.uniform(0.10, 0.25), 2)
+                percentages.append(value)
+                remaining -= value
+
+            percentages.append(round(max(remaining, 0), 2))
+
+            labels = []
+            values = []
+
+            for sector, percent in zip(sectors, percentages):
+                labels.append(sector)
+                values.append(round(total_production * percent, 2))
+
+            return {
+                "labels": labels,
+                "values": values,
+                "total_production": total_production
+            }
+        
+        elif sector_report == "PANNELS":
+            return jsonify({"msg": "Relatório por painéis ainda não implementado"})
+
+        
+
+
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
     request.json()
