@@ -65,7 +65,8 @@ function show_card_panels(){
 
 function make_data_graph(id_canvas, data, type){
     const conteiner = document.getElementById(id_canvas);
-
+//==========================================================================================================================
+    //bloco pertencente a primeira função: consumo e produção:
     if(type === "production"){
         new Chart(conteiner, {
             type: "bar",
@@ -112,7 +113,7 @@ function make_data_graph(id_canvas, data, type){
                     type: "line",
                     label: "Consumo (kWh)",
                     data: data.consumo,
-                    borderColor: "#C40B0B",
+                    borderColor: "#031626",
                     backgroundColor: "#C40B0B",
                     borderWidth: 2,
                     tension: 0.3
@@ -120,8 +121,22 @@ function make_data_graph(id_canvas, data, type){
             ]
         }
     });
-
- }
+//==========================================================================================================================
+    }
+    else if (type ==="report"){
+        new Chart(conteiner, {
+            type: "pie",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Produção potencial dos setores (kWh)",
+                    data: data.values,
+                    backgroundColor: ['#1EA91B','#EEAC03','#F56B07','#3A048F','#8F3F04'],     
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
 }
 
 function production_potential(){
@@ -165,6 +180,96 @@ function consumptionVSproduction(){
     })
 }
 
+function reports_menu(id_canvas,id_btn,type_report){
+    const conteiner_graph = document.getElementById(id_canvas)
+    const btn_report = document.getElementById(id_btn)
+
+    btn_report.onclick = function(){
+
+        if (type_report === "btn_reports_for_sectors"){
+            conteiner_graph.style.display = "block"
+            fetch("http://127.0.0.1:5000/report_production_menu",{
+                method: "POST",
+                headers:{
+                    'content-type': 'application/json',
+                },
+                body:JSON.stringify({
+                    btn_report: 'SECTORS'
+                })
+            })
+
+            .then(response => response.json())
+            .then(data_report =>{
+                console.log("resposta do servidor sobre o relatório dos setores:", data_report)
+                make_data_graph("continer_graphics_reports",data_report,"report")
+            })
+
+        }else if(type_report === "btn_reports_for_pannels"){
+            conteiner_graph.style.display = "block"
+            fetch("http://127.0.0.1:5000/report_production_menu",{
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body:JSON.stringify({
+                    btn_report: 'PANNELS'
+                })
+            })
+
+            .then(response => response.json())
+            .then(data_report =>{
+                console.log("resposta do servidor sobre o relatório dos setores:", data_report);
+                make_data_graph("continer_graphics_reports",data_report,"report")
+            })
+        }
+
+
+    }
+
+                                                                                        //acima a função de criação de relatório para o menu de relatórios, tendo o relatório de produção e o relatório de paineis
+
+}
+
+
+
+/*function management_shipping_invoice(){
+
+    //VOLTAR AQUI MAIS TARDE
+
+    const btn_to_push_unic_confirm = document.getElementById("confirme_to_push")
+    const btn_to_push_unic_cancel = document.getElementById("cancel_to_push")
+    const btn_to_push_coletive = document.getElementById("to_push_coletive")
+
+    let id_resident = document.getElementById("id_resident_for_invoice").value
+    let name_resident = document.getElementById("name_resident_for_invoice").value
+    let adress_sector_resident = document.getElementById("adress_resident_for_invoice").value
+
+    btn_to_push_coletive.addEventListener("click",function(){
+        prompt("Atenção! O sistema está prestes a enviar a fatura de energia para todo o bairro! Para confirmar o ID do usuário:")
+    })
+
+    btn_to_push_unic_confirm.addEventListener("click", function(){
+        fetch("/shipping_unic",{
+            method:"POST",
+            headers:{
+                'Content-type': 'application/json',
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                id: id_resident,
+                name: name_resident,
+                adress_sector: adress_sector_resident
+            })
+        })
+        
+        .then(response => response.json())
+        .then(data =>
+            console.log("resposta do servidor:",data)
+        )
+
+    })
+
+}*/
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -184,11 +289,9 @@ document.addEventListener("DOMContentLoaded", function () {
 //==================================================================================================================================================
    {open_menu("data_reports_btn","reports_menu", "block")
         {open_inner_option("btn_reports_for_sectors","continer_graphics_and_sectors_reports", "grid")
-            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+            reports_menu("continer_graphics_reports","btn_reports_for_sectors","btn_reports_for_sectors")
+                //Acima, o bloco cria o gráfico assim que o usuário clicar em setores
+ }
 
         {open_inner_option("btn_reports_for_pannels", "continer_graphics_and_sectors_reports", "grid")
             open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
@@ -242,6 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
             open_inner_option("sending_bills_btn", "to_push_invoice", "block")
+                //management_shipping_invoice()
             open_inner_option("to_push_unic", "conteiner_infor_resident", "flex")
     }
 
