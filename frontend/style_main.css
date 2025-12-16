@@ -215,6 +215,7 @@ body{
         margin-bottom: 10%;
         background-color: #d9d9d9;
         border-radius: 2em;
+        overflow: auto;
 
         .conteiner_list_sectors{
             display: flex;
@@ -228,6 +229,8 @@ body{
                 width: 50%;
                 height: 50%;
                 border-radius: 2em;
+                overflow: auto;
+                scrollbar-width: none;
             }
         }
 

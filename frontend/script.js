@@ -136,6 +136,28 @@ function make_data_graph(id_canvas, data, type){
                 }]
             }
         });
+    }else if (type === "panels") {
+        new Chart(conteiner, {
+            type: "bar",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Produção por Painel (kWh)",
+                    data: data.values,
+                    backgroundColor: "#1EA91B",
+                    borderColor: "#031626",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     }
 }
 
@@ -208,7 +230,7 @@ function reports_menu(id_canvas,id_btn,type_report){
             conteiner_graph.style.display = "block"
             fetch("http://127.0.0.1:5000/report_production_menu",{
                 method: "POST",
-                headers: {
+                headers:{
                     'Content-type': 'application/json',
                 },
                 body:JSON.stringify({
@@ -217,17 +239,15 @@ function reports_menu(id_canvas,id_btn,type_report){
             })
 
             .then(response => response.json())
-            .then(data_report =>{
-                console.log("resposta do servidor sobre o relatório dos setores:", data_report);
-                make_data_graph("continer_graphics_reports",data_report,"report")
+            .then(data_report_panels =>{
+                console.log("resposta do servidor sobre o relatório dos paineis do setores:", data_report_panels);
+                make_data_graph("continer_graphics_reports",data_report_panels,"panels")
             })
+
+                                                        //acima a função de criação de relatório para o menu de relatórios, tendo o relatório de produção e o relatório de paineis. As funções verificam qual o tipo de relátorio o usuário deseja ver (se o de paineis ou o de setores, a depender do tipo de relátorio ele retornará um determinado tipo de dado)
+
         }
-
-
     }
-
-                                                                                        //acima a função de criação de relatório para o menu de relatórios, tendo o relatório de produção e o relatório de paineis
-
 }
 
 
@@ -294,11 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
  }
 
         {open_inner_option("btn_reports_for_pannels", "continer_graphics_and_sectors_reports", "grid")
-            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+            reports_menu("continer_graphics_reports","alfa_sector_graph", "btn_reports_for_pannels")
+            reports_menu("continer_graphics_reports","bravo_sector_graph", "btn_reports_for_pannels")
+            reports_menu("continer_graphics_reports","charlie_sector_graph", "btn_reports_for_pannels")
+            reports_menu("continer_graphics_reports","delta_sector_graph", "btn_reports_for_pannels")
+            reports_menu("continer_graphics_reports","echo_sector_graph", "btn_reports_for_pannels")}
 
         {open_inner_option("btn_reports_for_sectors_consumption", "continer_graphics_and_sectors_reports", "grid")
             open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
