@@ -109,14 +109,14 @@ def report_production_menu():
 
     if request.method == 'POST':
         data_report = request.get_json()
-        sector_report = data_report.get("btn_report")
+        report_data = data_report.get("btn_report")
 
 
         production = production_potential()
         total_production = round(sum(production["valores"]), 2)
 
 
-        if sector_report == "SECTORS":
+        if report_data == "SECTORS":
 
             sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
 
@@ -143,8 +143,19 @@ def report_production_menu():
                 "total_production": total_production
             }
         
-        elif sector_report == "PANNELS":
-            return jsonify({"msg": "Relatório por painéis ainda não implementado"})
+        elif report_data == "PANNELS":
+
+            total_pannels = 22000
+
+            production_energ_for_pannel = round(total_production / total_pannels,4)
+
+            labels = [f"Painel {i+1}"for i in range(total_pannels)]
+            values = [production_energ_for_pannel for _ in range(total_pannels)]
+
+            return {"labels": labels[:50],
+                            "values": values[:50],
+                            "total_production": total_production,
+                            "production_energ_for_pannel": production_energ_for_pannel}
 
         
 
