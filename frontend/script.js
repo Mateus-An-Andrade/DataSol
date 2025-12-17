@@ -81,7 +81,9 @@ function make_data_graph(id_canvas, data, type){
                 }]
             }
         });
-    }else if(type === "consumption"){
+    }
+    
+    else if(type === "consumption"){
                 new Chart(conteiner, {
                 type: "line",
                 data: {
@@ -96,7 +98,9 @@ function make_data_graph(id_canvas, data, type){
             }
         });
 
-    }else if(type === "consumptionVSproduction"){
+    }
+    
+    else if(type === "consumptionVSproduction"){
         new Chart(conteiner, {
             data: {
             labels: data.horas,
@@ -123,6 +127,7 @@ function make_data_graph(id_canvas, data, type){
     });
 //==========================================================================================================================
     }
+
     else if (type ==="report"){
         new Chart(conteiner, {
             type: "pie",
@@ -136,7 +141,9 @@ function make_data_graph(id_canvas, data, type){
                 }]
             }
         });
-    }else if (type === "panels") {
+    }
+    
+    else if (type === "panels") {
         new Chart(conteiner, {
             type: "bar",
             data: {
@@ -159,6 +166,22 @@ function make_data_graph(id_canvas, data, type){
             }
         });
     }
+
+       else if (type ==="report_consumption_sectors"){
+        new Chart(conteiner, {
+            type: "pie",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Consumo Por setores (kWh)",
+                    data: data.values,
+                    backgroundColor: ['#a91b1bff','#d43131ff','#f53f07ff','#8f041bff','#8f0404ff'],     
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
 }
 
 function production_potential(){
@@ -216,7 +239,7 @@ function reports_menu(id_canvas,id_btn,type_report){
                     'content-type': 'application/json',
                 },
                 body:JSON.stringify({
-                    btn_report: 'SECTORS'
+                    btn_report: 'SECTORS_PRODUCTION'
                 })
             })
 
@@ -226,6 +249,7 @@ function reports_menu(id_canvas,id_btn,type_report){
                 make_data_graph("continer_graphics_reports",data_report,"report")
             })
 
+//--------------------------------------------------------------------------------------------------------------------------
         }else if(type_report === "btn_reports_for_pannels"){
             conteiner_graph.style.display = "block"
             fetch("http://127.0.0.1:5000/report_production_menu",{
@@ -246,6 +270,25 @@ function reports_menu(id_canvas,id_btn,type_report){
 
                                                         //acima a função de criação de relatório para o menu de relatórios, tendo o relatório de produção e o relatório de paineis. As funções verificam qual o tipo de relátorio o usuário deseja ver (se o de paineis ou o de setores, a depender do tipo de relátorio ele retornará um determinado tipo de dado)
 
+        }
+//--------------------------------------------------------------------------------------------------------------------------
+        else if(type_report === "btn_reports_for_sectors_consumption"){
+            conteiner_graph.style.display = "block"
+            fetch("http://127.0.0.1:5000/report_production_menu",{
+                method: "POST",
+                headers:{
+                    'content-type': 'application/json',
+                },
+                body:JSON.stringify({
+                    btn_report: 'SECTORS_CONSUMPTION'
+                })
+            })
+
+            .then(response => response.json())
+            .then(data_report_consumption =>{
+                console.log("resposta do servidor sobre o relatório de consumo dos setores:", data_report_consumption)
+                make_data_graph("continer_graphics_reports",data_report_consumption,"report_consumption_sectors")
+            })
         }
     }
 }
@@ -321,11 +364,8 @@ document.addEventListener("DOMContentLoaded", function () {
             reports_menu("continer_graphics_reports","echo_sector_graph", "btn_reports_for_pannels")}
 
         {open_inner_option("btn_reports_for_sectors_consumption", "continer_graphics_and_sectors_reports", "grid")
-            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+            reports_menu("continer_graphics_reports","btn_reports_for_sectors_consumption","btn_reports_for_sectors_consumption")
+                
 
         {open_inner_option("btn_reports_for_individuals_consumption", "continer_graphics_and_sectors_reports", "grid")
             open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
@@ -373,4 +413,5 @@ document.addEventListener("DOMContentLoaded", function () {
     close_menu("reports_menu")
     close_menu("panels_menu")
     close_menu("energetic_management")
+    }
 })
