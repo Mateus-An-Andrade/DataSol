@@ -105,7 +105,7 @@ def consumption_vs_production():
 #===========================================================================================================================
 
 @app.route("/report_production_menu", methods=["POST"])
-def report_production_menu():
+def report_prod_and_cons_menu():
 
     if request.method == 'POST':
         data_report = request.get_json()
@@ -113,10 +113,11 @@ def report_production_menu():
 
 
         production = production_potential()
+        consumption = consumption_energ()
         total_production = round(sum(production["valores"]), 2)
 
-
-        if report_data == "SECTORS":
+#---------------------------------------------------------------------------------------------------------------------------
+        if report_data == "SECTORS_PRODUCTION":
 
             sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
 
@@ -142,7 +143,8 @@ def report_production_menu():
                 "values": values,
                 "total_production": total_production
             }
-        
+                                                        #Acima a condicional da função relatórios. A condicional faz com que o sistema: verifique o json retornado do front end, se for relatórios de produção por setores ele deverá simular a produção com base na radiação solar retornado da api climatica, escolhendo as porcentagens em que cada setor contribui para produção, deve colocar os valores em uma lista e retornar esses dados em forma de JSON para o front criar dados
+#---------------------------------------------------------------------------------------------------------------------------       
         elif report_data == "PANNELS":
 
             total_pannels = 22000
@@ -156,9 +158,44 @@ def report_production_menu():
                             "values": values[:50],
                             "total_production": total_production,
                             "production_energ_for_pannel": production_energ_for_pannel}
-
         
+                                                    #Acima a condicional da função relatórios. A condicional faz com que o sistema: verifique o json retornado do front end, se for relatórios de produção por paineis dos setores ele deverá simular a produção com base na radiação solar retornado da api climatica, em que cada painel do setor produz de modo uniforme isso por que as condições para todos os paineis é a mesma. Ele deve colocar os valores em uma lista e retornar esses dados em forma de JSON para o front criar dados
+        
+#---------------------------------------------------------------------------------------------------------------------------
 
+        elif report_data == "SECTORS_CONSUMPTION":
+
+            consumption = consumption_energ()
+            total_consumption = round(sum(consumption["valores"]), 2)
+            
+            sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
+
+            percentages = []
+            remaining = 1.0
+
+            for i in range(len(sectors) - 1):
+                value = round(random.uniform(0.10, 0.25), 2)
+                percentages.append(value)
+                remaining -= value
+
+            percentages.append(round(max(remaining, 0), 2))
+
+            labels = []
+            values = []
+
+            for sector, percent in zip(sectors, percentages):
+                labels.append(sector)
+                values.append(round(total_consumption * percent, 2))
+
+            return {
+                "labels": labels,
+                "values": values,
+                "total_consumption": total_consumption
+            }
+        
+                                            #Acima a condicional da função relatórios. A condicional faz com que o sistema: verifique o json retornado do front end, se for relatórios de consumo por setores ele deverá simular o consumo com base na função de consumo consumption_energ(). Ele deve colocar os valores em uma lista e retornar esses dados em forma de JSON para o front criar dados.
+        
+#---------------------------------------------------------------------------------------------------------------------------
 
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
