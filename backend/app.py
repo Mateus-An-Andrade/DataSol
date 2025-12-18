@@ -3,11 +3,26 @@ import requests
 from flask_cors import CORS
 from datetime import date
 import random
+import psycopg2
+from psycopg2.extras import RealDictCursor
+from psycopg2.extras import DictCursor
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
+def get_db_connection():
+    conn = psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD")
+    )
+    return conn
 
 @app.get("/clima")
 def clima():
@@ -196,6 +211,32 @@ def report_prod_and_cons_menu():
                                             #Acima a condicional da função relatórios. A condicional faz com que o sistema: verifique o json retornado do front end, se for relatórios de consumo por setores ele deverá simular o consumo com base na função de consumo consumption_energ(). Ele deve colocar os valores em uma lista e retornar esses dados em forma de JSON para o front criar dados.
         
 #---------------------------------------------------------------------------------------------------------------------------
+
+        elif report_data == "INDIVIDUAL":
+            data_report.get("SECTOR_IND")
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            sector_cons_ind = data_report.get("SECTOR_IND")
+
+            sector_labels = []
+            sector_values = []
+
+            if sector_cons_ind:
+                cursor.execute('''SELECT * FROM resident WHERE sector_resident ILIKE %s''', (f"%{sector_cons_ind}%",))
+                sector_result = cursor.fetchall()
+            
+            for row in sector_result:
+                sector_labels.append(row[0])         
+                sector_values.append(row[4])
+                
+            cursor.close()
+            conn.close()
+
+            return {
+                "sector": sector_labels,
+                "value_invoice": sector_values
+            }
+
 
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
