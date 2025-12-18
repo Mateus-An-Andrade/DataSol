@@ -182,6 +182,22 @@ function make_data_graph(id_canvas, data, type){
         });
     }
 
+    else if (type === "report_consumption_individuals"){
+            new Chart(conteiner, {
+                type: "bar",
+                data: {
+                    labels: data.sector,
+                    datasets: [{
+                        label: "Consumo individual(kWh)",
+                        data: data.value_invoice,
+                        backgroundColor: '#C40B0B',
+                        borderColor: "#031626",      
+                        borderWidth: 1
+                }]
+            }
+        });
+    }
+
 }
 
 function production_potential(){
@@ -290,6 +306,29 @@ function reports_menu(id_canvas,id_btn,type_report){
                 make_data_graph("continer_graphics_reports",data_report_consumption,"report_consumption_sectors")
             })
         }
+//--------------------------------------------------------------------------------------------------------------------------
+        else if(type_report === "btn_reports_for_individuals_consumption"){
+            conteiner_graph.style.display = "block"
+            const sector_ind_consumpiton = document.getElementById(id_btn).dataset.sector
+            fetch("http://127.0.0.1:5000/report_production_menu",{
+                method: "POST",
+                headers:{
+                    'content-type': 'application/json',
+                },
+                body:JSON.stringify({
+                    btn_report:'INDIVIDUAL',
+                    SECTOR_IND: sector_ind_consumpiton
+                })
+            })
+
+            .then(response => response.json())
+            .then(data_report_consumption_ind =>{
+                console.log("resposta do servidor sobre o relatório de consumo dos setores:", data_report_consumption_ind)
+                make_data_graph("continer_graphics_reports",data_report_consumption_ind,"report_consumption_individuals")
+            })
+        }
+
+
     }
 }
 
@@ -368,11 +407,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 
 
         {open_inner_option("btn_reports_for_individuals_consumption", "continer_graphics_and_sectors_reports", "grid")
-            open_inner_option("alfa_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("bravo_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("charlie_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("delta_sector_graph", "continer_graphics_reports", "grid")
-            open_inner_option("echo_sector_graph", "continer_graphics_reports", "grid")}
+            reports_menu("continer_graphics_reports","alfa_sector_graph", "btn_reports_for_individuals_consumption")
+            reports_menu("continer_graphics_reports","bravo_sector_graph", "btn_reports_for_individuals_consumption")
+            reports_menu("continer_graphics_reports","charlie_sector_graph", "btn_reports_for_individuals_consumption")
+            reports_menu("continer_graphics_reports","delta_sector_graph", "btn_reports_for_individuals_consumption")
+            reports_menu("continer_graphics_reports","echo_sector_graph", "btn_reports_for_individuals_consumption")
+           }
 
                                                                                                  //Acima estão as funçoes do menu "Relatórios", as funções somente abrem e escondem interfaces
         }
