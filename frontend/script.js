@@ -332,6 +332,15 @@ function reports_menu(id_canvas,id_btn,type_report){
     }
 }
 
+function sectors_and_panel_information(id_sector){
+    const btn_sector_panel = document.getElementById(id_sector);
+
+    btn_sector_panel.addEventListener("click", () => {
+        sector_selected = btn_sector_panel.value;
+        console.log("Setor selecionado:", sector_selected);
+    });
+}
+
 
 
 /*function management_shipping_invoice(){
@@ -419,11 +428,46 @@ document.addEventListener("DOMContentLoaded", function () {
 //==================================================================================================================================================
     {open_menu("data_panels_btn","panels_menu", "block")
             opacity_btns("btn_panel_reports","panels_menu")
+            document.querySelectorAll(".solar_panel").forEach(panel => {
+                panel.addEventListener("click", (event) => {
+
+                    if (!sector_selected) {
+                        alert("Selecione um setor primeiro");
+                        return;
+                    }
+
+                    const index_value = event.currentTarget.dataset.index;
+                    console.log("Painel clicado:", index_value);
+
+                    fetch("http://127.0.0.1:5000/panels_info", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            reference_sector: sector_selected,
+                            dt_index_ref: index_value
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("dados referentes a produção dos paineis dos setores:", data);
+                    });
+                });
+            });
+
             open_inner_option("alfa_sector_panel_btn", "panel_solar_container_reports", "grid")
+                sectors_and_panel_information("alfa_sector_panel_btn")
+
             open_inner_option("bravo_sector_panel_btn", "panel_solar_container_reports", "grid")
+                sectors_and_panel_information("bravo_sector_panel_btn")
+
             open_inner_option("charlie_sector_panel_btn", "panel_solar_container_reports", "grid")
+                sectors_and_panel_information("charlie_sector_panel_btn")
+
             open_inner_option("delta_sector_panel_btn", "panel_solar_container_reports", "grid")
+                sectors_and_panel_information("delta_sector_panel_btn")
+
             open_inner_option("echo_sector_panel_btn", "panel_solar_container_reports", "grid")
+                sectors_and_panel_information("echo_sector_panel_btn")
             opacity_btns("solar_panel","panels_menu")
             show_card_panels()
 
