@@ -238,6 +238,30 @@ def report_prod_and_cons_menu():
             }
 
 
+@app.route("/panels_info", methods = ["POST"])
+def panels_info():
+    data_infor_panel = request.get_json()
+
+    infor_panel = data_infor_panel.get("reference_sector")
+    index_pannel = data_infor_panel.get("dt_index_ref")
+
+    print(infor_panel)
+    print(index_pannel)
+
+    data_report_detail_panel = production_potential()
+
+    total_production_sector = sum(data_report_detail_panel["valores"])
+
+    contribuition_panel = sum(data_report_detail_panel["valores"])/30000
+
+    percent_panel = (contribuition_panel / total_production_sector) * 100
+
+    return {"setor": infor_panel,
+            "painel": index_pannel,
+            "percent_panel":percent_panel,
+            }
+
+
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
     request.json()
