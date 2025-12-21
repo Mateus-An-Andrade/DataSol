@@ -63,6 +63,22 @@ function show_card_panels(){
     });
 }
 
+function updateReportPanel(data) {
+    const porcentagem = (data.percent_panel * 100).toFixed(2);
+    const production_panel = (data.panel_production_kwh). toFixed(2)
+    let sector_reference = document.getElementById("sector_reference")
+
+    document.getElementById("span_production_panel").textContent = data.panel_production_kwh;
+    document.getElementById("span_efic_panel").textContent = data.eficience;
+    document.getElementById("span_porcent_panel").textContent = data.percent_panel;
+    document.getElementById("span_panel_number").textContent = data.panel_number
+   
+    sector_reference.textContent = data.setor
+
+    document.getElementById("span_porcent_panel").textContent = porcentagem + "%";
+    document.getElementById("span_production_panel").textContent = production_panel + " KWh"
+}
+
 function make_data_graph(id_canvas, data, type){
     const conteiner = document.getElementById(id_canvas);
 //==========================================================================================================================
@@ -444,12 +460,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             reference_sector: sector_selected,
-                            dt_index_ref: index_value
+                            dt_index_ref: index_value,
                         })
                     })
                     .then(res => res.json())
                     .then(data => {
                         console.log("dados referentes a produção dos paineis dos setores:", data);
+
+                        updateReportPanel(data);
+                        document.querySelector(".report_pannels").style.display = "block";
                     });
                 });
             });
@@ -469,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
             open_inner_option("echo_sector_panel_btn", "panel_solar_container_reports", "grid")
                 sectors_and_panel_information("echo_sector_panel_btn")
             opacity_btns("solar_panel","panels_menu")
-            show_card_panels()
+
 
                                                                                                 //Acima está o menu de relátórios de painéis, aonde mostrará quanto de energia tá sendo produzida cada painel e o status de produção, ou seja, se está 100% ou não.
     }
