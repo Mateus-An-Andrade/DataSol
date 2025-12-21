@@ -263,7 +263,9 @@ def panels_info():
     return {"setor": infor_panel,
             "painel": index_pannel,
             "percent_panel":percent_panel,
-            "eficience": eficience
+            "eficience": eficience,
+            "panel_production_kwh": contribuition_panel,
+            "panel_number": index_pannel
             }
 
 
