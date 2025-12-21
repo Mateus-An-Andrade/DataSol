@@ -256,9 +256,14 @@ def panels_info():
 
     percent_panel = (contribuition_panel / total_production_sector) * 100
 
+    production_ideal = sum(data_report_detail_panel["valores"]) / 30000
+
+    eficience = (contribuition_panel / production_ideal)*100
+
     return {"setor": infor_panel,
             "painel": index_pannel,
             "percent_panel":percent_panel,
+            "eficience": eficience
             }
 
 
