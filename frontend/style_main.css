@@ -418,6 +418,14 @@ body{
         padding: 1em;
     }
 
+    .conteiner_card_prevent_analys{
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        max-height: 100%; 
+        justify-items: center;
+        align-items: center;
+        row-gap: 0.5em;
+    }
             .infor_tec_control_forn{
                 display: flex;
                 flex-direction: column;

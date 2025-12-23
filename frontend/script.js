@@ -357,6 +357,60 @@ function sectors_and_panel_information(id_sector){
     });
 }
 
+function analyis_prevent(data){
+    let title_conteiner = document.createElement("h4")
+    const conteiner_informs_preventive_analysis = document.getElementById("conteiner_informs_preventive_analysis")
+    const conteiner_card_prevent_analys = document.getElementById("conteiner_card_prevent_analys")
+    title_conteiner.textContent = "Setor data:"
+    
+    conteiner_informs_preventive_analysis
+    let info_total_panel = document.createElement("h5")
+    let info_total_panel_good_conditions = document.createElement("h5")
+    let info_total_panel_bad_conditions = document.createElement("h5")
+
+    fetch("http://127.0.0.1:5000/analyis_prevent")
+    .then(response => response.json())
+    .then(data =>{
+        console.log("Dados para análise preventiva: ", data)
+
+        sectors = data.sectors
+    
+        sectors.forEach(sector => {
+            console.log("Setores de produção:" ,sector)
+            const conteiner_data_analysi_prevent = document.createElement("div")
+            const title_card = document.createElement("h4")
+            const info_total_panels = document.createElement("h5")
+            const info_total_panels_good_conditions = document.createElement("h5")
+            const info_total_panels_bad_conditions = document.createElement("h5")
+
+
+            conteiner_data_analysi_prevent.className = "preventive_analysis"
+            conteiner_data_analysi_prevent.style.display = "block"
+            conteiner_informs_preventive_analysis.appendChild(conteiner_data_analysi_prevent)
+            conteiner_card_prevent_analys.appendChild(conteiner_data_analysi_prevent)
+
+
+            title_card.textContent = "Setor:"
+            conteiner_data_analysi_prevent.appendChild(title_card)
+
+
+
+            info_total_panels.textContent = "Total de painéis:"
+            conteiner_data_analysi_prevent.appendChild(info_total_panels)
+
+            info_total_panels_good_conditions.textContent = "Total de painéis em boas condições:"
+            conteiner_data_analysi_prevent.appendChild(info_total_panels_good_conditions)
+
+            info_total_panels_bad_conditions.textContent = "Total de painéis com anomalias:"
+            conteiner_data_analysi_prevent.appendChild(info_total_panels_bad_conditions)
+
+        });
+
+        conteiner_informs_preventive_analysis.appendChild(conteiner_card_prevent_analys)
+
+    })
+}
+
 
 
 /*function management_shipping_invoice(){
@@ -499,6 +553,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("preventive_analysis_btn", "conteiner_informs_preventive_analysis", "grid")
             open_inner_option("preventive_analysis_btn", "preventive_analysis_continer", "block")
+                analyis_prevent()
 
             open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "block")
             open_inner_option("backup_energy_btn","conteiner_graph_and_tec_card", "flex")
