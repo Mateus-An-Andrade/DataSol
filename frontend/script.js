@@ -390,18 +390,18 @@ function analyis_prevent(data){
             conteiner_card_prevent_analys.appendChild(conteiner_data_analysi_prevent)
 
 
-            title_card.textContent = "Setor:"
+            title_card.textContent = "Setor: " + sector
             conteiner_data_analysi_prevent.appendChild(title_card)
 
 
 
-            info_total_panels.textContent = "Total de painéis:"
+            info_total_panels.innerHTML = `Total de painéis: <i>${data.panels_for_sector}</i>`;
             conteiner_data_analysi_prevent.appendChild(info_total_panels)
 
-            info_total_panels_good_conditions.textContent = "Total de painéis em boas condições:"
+            info_total_panels_good_conditions.innerHTML = `Total de painéis em boas condições: <i>${data.panels_for_sector}</i>`
             conteiner_data_analysi_prevent.appendChild(info_total_panels_good_conditions)
 
-            info_total_panels_bad_conditions.textContent = "Total de painéis com anomalias:"
+            info_total_panels_bad_conditions.innerHTML = `Total de painéis com anomalias:  <i>${0}</i>`
             conteiner_data_analysi_prevent.appendChild(info_total_panels_bad_conditions)
 
         });
