@@ -237,6 +237,7 @@ def report_prod_and_cons_menu():
                 "value_invoice": sector_values
             }
 
+#===========================================================================================================================
 
 @app.route("/panels_info", methods = ["POST"])
 def panels_info():
@@ -268,6 +269,19 @@ def panels_info():
             "panel_number": index_pannel
             }
 
+#===========================================================================================================================
+@app.route("/analyis_prevent", methods = ["GET","POST"])
+def analyis_prevent():
+    total_panels = 30000
+    total_sectors = 5
+    sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
+    panels_for_sector = total_panels / total_sectors
+    
+
+    return{"total_panels": total_panels,
+           "panels_for_sector": panels_for_sector,
+           "total_sectors": total_sectors,
+           "sectors": sectors}
 
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
