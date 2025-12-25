@@ -452,6 +452,25 @@ function energ_backup(){
     
 }
 
+function control_supply_energ(){
+    const infor_sector_energ_alfa = document.getElementById("infor_sector_energ_alfa")
+    const infor_sector_energ_bravo = document.getElementById("infor_sector_energ_bravo")
+    const infor_sector_energ_charlie = document.getElementById("infor_sector_energ_charlie")
+    const infor_sector_energ_delta = document.getElementById("infor_sector_energ_delta")
+    const infor_sector_energ_echo = document.getElementById("infor_sector_energ_echo")
+    const control_supply_btn = document.getElementById("control_supply_btn")
+
+    control_supply_btn.addEventListener("click",() => {
+        fetch("http://127.0.0.1:5000/control_supply")
+        .then(response => response.json())
+        .then(data => {
+            console.log("dados retornados para o controle de energia:", data)
+            make_data_graph("infor_grafics", data, "report")
+        })
+    })
+    
+}
+
 
 
 
@@ -603,6 +622,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
             open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "grid")
+                control_supply_energ()
+
 
             open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
             open_inner_option("sending_bills_btn", "to_push_invoice", "block")
