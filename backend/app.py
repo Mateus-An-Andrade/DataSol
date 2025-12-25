@@ -342,6 +342,38 @@ def production_for_backup():
 
 #===========================================================================================================================
 
+@app.route("/control_supply", methods = ["GET","POST"])
+def control_supply():
+    production = production_potential()
+    consumption = consumption_energ()
+
+    sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
+    percentages = []
+    remaining = 1.0
+    total_production = round(sum(production["valores"]), 2)
+
+    for i in range(len(sectors) - 1):
+        value = round(random.uniform(0.10, 0.25), 2)
+        percentages.append(value)
+        remaining -= value
+
+        percentages.append(round(max(remaining, 0), 2))
+
+        labels = []
+        values = [] # numeros de produção!
+
+        for sector, percent in zip(sectors, percentages):
+            labels.append(sector)
+            values.append(round(total_production * percent, 2))
+
+
+    return{"labels":labels,
+           "values":values}
+
+
+
+#===========================================================================================================================
+
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
     request.json()
