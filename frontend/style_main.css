@@ -577,7 +577,6 @@ body{
 
         .infor_grafics{
             display: flex;
-            background-color: #8F3F04;
             width: 60%;
             height: 90%;
         }
@@ -598,7 +597,7 @@ body{
         }
 
         .infor_backup_sectors{
-                display: none; 
+                display: block; 
                 background-color: #ffffff;
                 width: 30%;
                 max-height: 80%;

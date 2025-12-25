@@ -1,3 +1,4 @@
+//const { createElement } = require("react")
 
 function open_menu(id_btn,id_menu, displayType = "grid"){
     const button_menu = document.getElementById(id_btn)
@@ -214,6 +215,21 @@ function make_data_graph(id_canvas, data, type){
         });
     }
 
+    else if (type ==="report_for_backup"){
+        new Chart(conteiner, {
+            type: "pie",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Produção potencial dos setores (kWh)",
+                    data: data.values,
+                    backgroundColor: ['#1EA91B','#EEAC03','#F56B07','#3A048F','#8F3F04'],     
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
 }
 
 function production_potential(){
@@ -364,9 +380,7 @@ function analyis_prevent(data){
     title_conteiner.textContent = "Setor data:"
     
     conteiner_informs_preventive_analysis
-    let info_total_panel = document.createElement("h5")
-    let info_total_panel_good_conditions = document.createElement("h5")
-    let info_total_panel_bad_conditions = document.createElement("h5")
+
 
     fetch("http://127.0.0.1:5000/analyis_prevent")
     .then(response => response.json())
@@ -410,6 +424,34 @@ function analyis_prevent(data){
 
     })
 }
+
+function energ_backup(){
+
+    const inform_supply =  document.getElementById("inform_supply")
+    const inform_time_supply =  document.getElementById("inform_time_supply")
+    const inform_sector_needed =  document.getElementById("inform_sector_needed")
+    const input_management_backup = document.getElementById("input_management_backup")
+
+    fetch("http://127.0.0.1:5000/energ_supply_backup")
+    .then(response => response.json())
+    .then(data =>{
+        console.log("dados retornados para relatório backup:", data)
+        make_data_graph("infor_grafics_for_backup",data,"report_for_backup")
+
+        inform_supply.textContent = data.supply
+        inform_time_supply.textContent = data.time_supply
+        inform_sector_needed.textContent = data.sector_needed
+
+        input_management_backup.addEventListener("click",function(){
+            if (data.supply <= 0){
+                alert("Quantidade de suprimento insuficiente para ativação!")
+        }
+        })
+    
+    })
+    
+}
+
 
 
 
@@ -557,6 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "block")
             open_inner_option("backup_energy_btn","conteiner_graph_and_tec_card", "flex")
+                energ_backup()
 
             open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
             open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "flex")

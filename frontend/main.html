@@ -240,28 +240,29 @@
                     <br>
 
                     <div class="conteiner_graph_and_tec_card" id="conteiner_graph_and_tec_card">
-                        <div class="infor_grafics" id="infor_grafics_for_backup">
+                        <canvas class="infor_grafics" id="infor_grafics_for_backup">
 
-                        </div>
+                        </canvas>
 
                             <div class="infor_backup_sectors" id="sectors_infor_backups">
                                 <h4> Suprimento energético</h4>
                                 <div class="infor_supply_reports">
                                     <hr>
-                                    <h5>Suprimento: <span></span> KW/h</h5>
+                                    <h5>Suprimento: <span id="inform_supply"></span> KW/h</h5>
                                     <hr>
-                                    <h5>Tempo estimado de fornecimento: <span></span>HS</h5>
-                                    <hr>
-                                    <h5>Setor critico: <span></span> </h5>
+                                    <h5>Tempo estimado de fornecimento: <span id="inform_time_supply"></span>HS</h5>
                                     <hr>
 
+                                    <h5>Setor critico: <span id="inform_sector_needed"></span> </h5>
+                                    <hr>
+                                     
                                     <div class="input_conteiner_management_backup">
-                                        <button class="input_management_backup"> ATIVAR BACKUP</button>
+                                        <button class="input_management_backup" id="input_management_backup"> ATIVAR BACKUP</button>
                                     </div>
 
                                 </div>
                             </div>
-
+                           
                     </div>
 
                 </div>
