@@ -602,7 +602,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 energ_backup()
 
             open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
-            open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "flex")
+            open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "grid")
 
             open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
             open_inner_option("sending_bills_btn", "to_push_invoice", "block")

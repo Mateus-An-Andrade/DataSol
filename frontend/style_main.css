@@ -431,7 +431,7 @@ body{
                 flex-direction: column;
                 align-items: center;
                 background-color: #ffffff;
-                width: 90%;
+                width: auto;
                 max-height: 100%;
                 height: auto;
                 border-radius: 1em;
@@ -465,7 +465,7 @@ body{
                     .infor_specific_sector{
                         display: grid;
                         background-color: rgb(255, 255, 255);
-                        width: 60%;
+                        width: auto;
                         height: 100%;
                         border: 1px solid black;
                         border-radius: 2em;
@@ -483,14 +483,24 @@ body{
                             margin-left: 1%;
                             margin-right: 1%;
                         }
-
+                    }
                         .management_supply_button{
-                            
                             width: 12em;
                             height: 1.5em;
                             font-size: smaller;
+                            border: solid 1px black;
+                            transition-duration: 0.3s;
                             gap: 1em;
                             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                            background-color: #d9d9d900;
+                            border-radius: 1em;
+                            text-align: center;
+                            cursor: pointer;
+                                
+                            &:hover{
+                                width: 13.2em;
+                                height: 3.2em;
+                                transition-duration: 0.3s;
                         }
                     }
                 }
