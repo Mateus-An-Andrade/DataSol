@@ -8,6 +8,7 @@ from psycopg2.extras import RealDictCursor
 from psycopg2.extras import DictCursor
 from dotenv import load_dotenv
 import os
+import numpy as np
 
 load_dotenv()
 
@@ -282,6 +283,64 @@ def analyis_prevent():
            "panels_for_sector": panels_for_sector,
            "total_sectors": total_sectors,
            "sectors": sectors}
+
+#===========================================================================================================================
+
+@app.get("/energ_supply_backup")
+
+def production_for_backup():
+
+    production = production_potential()
+    consumption = consumption_energ()
+    total_production = round(sum(production["valores"]), 2)
+
+    sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
+
+    percentages = []
+    remaining = 1.0
+
+    for i in range(len(sectors) - 1):
+        value = round(random.uniform(0.10, 0.25), 2)
+        percentages.append(value)
+        remaining -= value
+
+        percentages.append(round(max(remaining, 0), 2))
+
+        labels = []
+        values = []
+
+        for sector, percent in zip(sectors, percentages):
+            labels.append(sector)
+            values.append(round(total_production * percent, 2))
+
+
+
+        supply_backup = round(
+           sum(production["valores"]) - sum(consumption["valores"]),
+            2
+        )
+        
+        min_percent = min(percentages)  # 0.12
+        index_min = percentages.index(min_percent)  # 0
+        sector_needed = sectors[index_min] 
+
+        if supply_backup <=0:
+            time_supply = 0
+        else:
+            time_supply = supply_backup / 24
+        
+    return {
+        "labels": labels,
+        "values": values,
+        "total_production": total_production,
+        "supply": supply_backup,
+        "time_supply": time_supply,
+        "sector_needed":sector_needed
+        }
+              
+                                                                                #Acima o código da função backup de energia, tem por objetivo simular um possivel acionamento de geradores para os setores mais críticos. Ele é semelhante a production potential, isso para criar o gráfico e exibir qual setor mais está precisando de energia backup. ao fim o algoritmo deve ver na lista, a menor porcentagem de produção, isso para exibir no card frontend, assim como o suprimento energético positivo ou negativo, e o tempo estimado de suprimento.
+
+#===========================================================================================================================
 
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
