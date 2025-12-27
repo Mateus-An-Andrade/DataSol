@@ -453,11 +453,7 @@ function energ_backup(){
 }
 
 function control_supply_energ(){
-    const infor_sector_energ_alfa = document.getElementById("infor_sector_energ_alfa")
-    const infor_sector_energ_bravo = document.getElementById("infor_sector_energ_bravo")
-    const infor_sector_energ_charlie = document.getElementById("infor_sector_energ_charlie")
-    const infor_sector_energ_delta = document.getElementById("infor_sector_energ_delta")
-    const infor_sector_energ_echo = document.getElementById("infor_sector_energ_echo")
+    const infor_sector_energ = document.querySelectorAll(".supply_energ_input")
     const control_supply_btn = document.getElementById("control_supply_btn")
 
     control_supply_btn.addEventListener("click",() => {
@@ -466,9 +462,26 @@ function control_supply_energ(){
         .then(data => {
             console.log("dados retornados para o controle de energia:", data)
             make_data_graph("infor_grafics", data, "report")
-        })
-    })
-    
+
+            infor_sector_energ.forEach(btn => {
+                btn.addEventListener("click", ()=>{
+                    fetch("http://127.0.0.1:5000/control_supply",{
+                        method: "POST",
+                        headers:{
+                            'Content-Type': 'Application/json',
+                        },
+                            body:JSON.stringify({
+                            sector_data: btn.value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data_sector =>{
+                        console.log("resposta do servidor sobre o setor:", data_sector)
+                    })
+                })
+            })  
+        })      
+    })   
 }
 
 
