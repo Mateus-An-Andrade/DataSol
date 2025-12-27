@@ -345,45 +345,17 @@ def production_for_backup():
 @app.route("/control_supply", methods=["GET", "POST"])
 def control_supply():
 
-    production = production_potential()
-    consumption = consumption_vs_production()["consumo"]
+    production = sum(production_potential()['valores'])
+    consumption = sum(consumption_vs_production()["consumo"])
     sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
-
-    if request.method == "POST":
-        data_report_sector = request.get_json()
-        report_data_sector = data_report_sector.get("sector_data")
-
-        consumption_sector= [random.random() for _ in sectors]
-        total_consumption_sectors = sum(consumption_sector)
-        percent_sectors = [v/total_consumption_sectors for v in consumption_sector]
-
-        if report_data_sector == "SETOR ALFA":
-            consumption_alfa = round(percent_sectors[0],2)*100
-            return{"consumo do setor alfa": consumption_alfa}
-
-        elif report_data_sector == "SETOR BRAVO":
-            consumption_bravo = round(percent_sectors[1],2)*100
-            return{"consumo do setor bravo": consumption_bravo}
-        
-        elif report_data_sector == "SETOR CHARLIE":
-            consumption_charlie = round(percent_sectors[1],2)*100
-            return{"consumo do setor charlie": consumption_charlie}
-
-        elif report_data_sector == "SETOR DELTA":
-            consumption_delta = round(percent_sectors[1],2)*100
-            return{"consumo do setor delta": consumption_delta}
-
-        elif report_data_sector == "SETOR ECHO":
-            consumption_echo = round(percent_sectors[1],2)*100
-            return{"consumo do setor echo": consumption_echo}
-
-
-
- 
+    labels = []
+    values_production = round((production/5),2)
+    values = []
     percentages = []
     remaining = 1.0
 
-    total_production = round(sum(production["valores"]), 2)
+    for val in range(0,5):
+        values.append(values_production)
 
     # Gera percentuais para todos menos o último setor
     for i in range(len(sectors) - 1):
@@ -394,18 +366,50 @@ def control_supply():
     # Último setor recebe o restante
     percentages.append(round(remaining, 2))
 
-    labels = []
-    values = []
-
     for sector, percent in zip(sectors, percentages):
         labels.append(sector)
-        values.append(round(total_production * percent, 2))
-
  
+
+    if request.method == "POST":
+        data_report_sector = request.get_json()
+        report_data_sector = data_report_sector.get("sector_data")
+
+        consumption_sector= [random.random() for _ in sectors]
+        total_consumption_sectors = sum(consumption_sector)
+        percent_sectors = [v/total_consumption_sectors for v in consumption_sector]
+
+
+
+        if report_data_sector == "SETOR ALFA":
+            consumption_alfa = round(percent_sectors[0],2)*100
+            return{"consumo do setor alfa": consumption_alfa,
+                   "produção do setor alfa": values_production}
+
+        elif report_data_sector == "SETOR BRAVO":
+            consumption_bravo = round(percent_sectors[1],2)*100
+            return{"consumo do setor bravo": consumption_bravo,
+                   "produção do setor bravo": values_production}
+        
+        elif report_data_sector == "SETOR CHARLIE":
+            consumption_charlie = round(percent_sectors[2],2)*100
+            return{"consumo do setor charlie": consumption_charlie,
+                   "produção do setor charlie": values_production}
+
+        elif report_data_sector == "SETOR DELTA":
+            consumption_delta = round(percent_sectors[3],2)*100
+            return{"consumo do setor delta": consumption_delta,
+                   "produção do setor delta": values_production}
+
+        elif report_data_sector == "SETOR ECHO":
+            consumption_echo = round(percent_sectors[4],2)*100
+            return{"consumo do setor echo": consumption_echo,
+                   "produção do setor echo": values_production}
+
  
     return {
         "labels": labels,
-        "values": values
+        "values": values,
+        "production_sectors": values_production
     }
 
 
