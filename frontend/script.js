@@ -230,6 +230,21 @@ function make_data_graph(id_canvas, data, type){
         });
     }
 
+    else if (type ==="report_sector_individual"){
+        new Chart(conteiner, {
+            type: "pie",
+            data: {
+                labels: ["Produção", "Consumo"],
+                datasets: [{
+                    label: "Eficiência e deficiência do setor",
+                    data: [data.produção_do_setor, data.consumo_do_setor],
+                    backgroundColor: ['#1EA91B','#C40B0B'],     
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
 }
 
 function production_potential(){
@@ -477,6 +492,7 @@ function control_supply_energ(){
                     .then(response => response.json())
                     .then(data_sector =>{
                         console.log("resposta do servidor sobre o setor:", data_sector)
+                        make_data_graph("graf_supply_and_consum",data_sector,"report_sector_individual")
                     })
                 })
             })  

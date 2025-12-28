@@ -470,6 +470,15 @@ body{
                         border: 1px solid black;
                         border-radius: 2em;
 
+                        .graf_supply_and_consum{
+                            display: flex;
+                            justify-items: center;
+                            max-width: 90%;
+                            max-height: 90%;
+                            margin-left: 5%;
+                            margin-right: 5%;
+                        }
+                    
                     }
 
                     .infor_specific_sector{
