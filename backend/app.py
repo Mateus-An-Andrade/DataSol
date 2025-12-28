@@ -381,35 +381,57 @@ def control_supply():
 
 
         if report_data_sector == "SETOR ALFA":
-            consumption_alfa = round(percent_sectors[0],2)*100
-            return{"consumo do setor alfa": consumption_alfa,
-                   "produção do setor alfa": values_production}
+            consumption_alfa = round(percent_sectors[0],2)*consumption
+            eficiency= ((values_production-consumption_alfa)/values_production)*100
+            deficiency= (consumption_alfa/values_production)*100
+            return{"consumo_do_setor": round(consumption_alfa,2),
+                   "produção_do_setor": round(values_production,2),
+                   "eficiência": round(eficiency,2),
+                   "deficiência": round(deficiency,2)
+                   }
 
         elif report_data_sector == "SETOR BRAVO":
-            consumption_bravo = round(percent_sectors[1],2)*100
-            return{"consumo do setor bravo": consumption_bravo,
-                   "produção do setor bravo": values_production}
+            consumption_bravo = round(percent_sectors[1],2)*consumption
+            eficiency= ((values_production-consumption_bravo)/values_production)*100
+            deficiency= (consumption_bravo/values_production)*100
+            return{"consumo_do_setor": round(consumption_bravo,2),
+                   "produção_do_setor": round(values_production,2),
+                   "eficiência": round(eficiency,2),
+                   "deficiência": round(deficiency,2)}
         
         elif report_data_sector == "SETOR CHARLIE":
-            consumption_charlie = round(percent_sectors[2],2)*100
-            return{"consumo do setor charlie": consumption_charlie,
-                   "produção do setor charlie": values_production}
+            consumption_charlie = round(percent_sectors[2],2)*consumption
+            eficiency= ((values_production-consumption_charlie)/values_production)*100
+            deficiency= (consumption_charlie/values_production)*100
+            return{"consumo_do_setor": round(consumption_charlie,2),
+                   "produção_do_setor": round(values_production,2),
+                   "eficiência": round(eficiency,2),
+                   "deficiência": round(deficiency,2)}
 
         elif report_data_sector == "SETOR DELTA":
-            consumption_delta = round(percent_sectors[3],2)*100
-            return{"consumo do setor delta": consumption_delta,
-                   "produção do setor delta": values_production}
+            consumption_delta = round(percent_sectors[3],2)*consumption
+            eficiency= ((values_production-consumption_delta)/values_production)*100
+            deficiency= (consumption_delta/values_production)*100
+            return{"consumo_do_setor": round(consumption_delta,2),
+                   "produção_do_setor": round(values_production,2),
+                   "eficiência": round(eficiency,2),
+                   "deficiência": round(deficiency,2)}
 
         elif report_data_sector == "SETOR ECHO":
-            consumption_echo = round(percent_sectors[4],2)*100
-            return{"consumo do setor echo": consumption_echo,
-                   "produção do setor echo": values_production}
+            consumption_echo = round(percent_sectors[4],2)*consumption
+            eficiency= ((values_production-consumption_echo)/values_production)*100
+            deficiency= (consumption_echo/values_production)*100
+            return{"consumo_do_setor": round(consumption_echo,2),
+                   "produção_do_setor": round(values_production,2),
+                   "eficiência": round(eficiency,2),
+                   "deficiência": round(deficiency,2)}
 
  
     return {
         "labels": labels,
         "values": values,
-        "production_sectors": values_production
+        "production_sectors": values_production,
+        "percent_sectors": percentages
     }
 
 
