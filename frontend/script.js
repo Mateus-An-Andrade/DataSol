@@ -1,5 +1,58 @@
 //const { createElement } = require("react")
 
+async function init_system(type){
+    //const choice = prompt("Digite 1 para Acesso de administrador / Digite 2 para Acesso de morador")
+    const data_user = document.getElementById("data_user")
+    const data_password = document.getElementById("data_password")
+    const submit_button = document.getElementById("submit_button")
+    const sleep = (ms) => new Promise (resolve => setTimeout(resolve,ms))
+    const select_acess = document.getElementById("select_acess")
+
+    if(type === "1"){
+        select_acess.style.display = "none"
+        await sleep(3000)
+
+        data_user.value = "469191-ADM"
+        data_password.value = "21345432"
+
+        submit_button.addEventListener("click", function(){
+            localStorage.setItem("perfil", type)
+            window.location.href = "main.html"
+        })
+        document.getElementById("overlay_acesso").style.display = "none";
+
+    }else if(type === "2"){
+        select_acess.style.display = "none"
+        await sleep(3000)
+
+        data_user.value = "469191-Morador"
+        data_password.value = "21345432"
+
+        submit_button.addEventListener("click", function(){
+            localStorage.setItem("perfil", type)
+            window.location.href = "main.html"
+        })
+
+        document.getElementById("overlay_acesso").style.display = "none";
+    }
+}
+
+function type_interface(){
+    const ru_type = document.getElementById("RU_TYPE");
+    const acess_type = document.getElementById("acess_type")
+
+    const choice = localStorage.getItem("perfil")
+
+     if (choice === "1") {
+        ru_type.value = "469191-1";
+        acess_type.value = "ADM";
+        
+    } else if (choice === "2") {
+        ru_type.value = "469191-2";
+        acess_type.value = "MORADOR";
+    }
+}
+
 function open_menu(id_btn,id_menu, displayType = "grid"){
     const button_menu = document.getElementById(id_btn)
     const menu_in_work = document.getElementById(id_menu)
@@ -470,6 +523,7 @@ function energ_backup(){
 function control_supply_energ(){
     const infor_sector_energ = document.querySelectorAll(".supply_energ_input")
     const control_supply_btn = document.getElementById("control_supply_btn")
+    const span_title = document.getElementById("title_infor_specific_sector")
 
     control_supply_btn.addEventListener("click",() => {
         fetch("http://127.0.0.1:5000/control_supply")
@@ -492,6 +546,7 @@ function control_supply_energ(){
                     .then(response => response.json())
                     .then(data_sector =>{
                         console.log("resposta do servidor sobre o setor:", data_sector)
+                        span_title.textContent = data_sector.SETOR
                         make_data_graph("graf_supply_and_consum",data_sector,"report_sector_individual")
                     })
                 })
@@ -503,7 +558,7 @@ function control_supply_energ(){
 
 
 
-/*function management_shipping_invoice(){
+function management_shipping_invoice(){
 
     //VOLTAR AQUI MAIS TARDE
 
@@ -540,11 +595,13 @@ function control_supply_energ(){
 
     })
 
-}*/
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
 //==================================================================================================================================================
+    type_interface()
+
     {open_menu("data_prod_cons_btn","production_and_consumption_menu", "grid")
         opacity_btns("btn_prod_consump_container", "conteiner_production")
         open_inner_option("potential_btn_prod_energ", "conteiner_data_analysis_consup_prod", "grid")

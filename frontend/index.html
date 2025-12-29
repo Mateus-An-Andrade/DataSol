@@ -13,16 +13,26 @@
         <h1>DataSol <br> Energia Solar Comunitária</h1>
     </div>
     
+    <div id="select_acess">
+        <h3>Como deseja acessar?</h3>
+        <div id="buttons_select_acess">
+            <button onclick="init_system('1')">Administrador</button>
+            <button onclick="init_system('2')">Morador</button>
+        </div>
+    </div>
+
     
     <div class="login">
             <h2>LOGIN:</h2> 
-            <input type="text" class="user">
+            <input type="text" class="user" id="data_user">
 
             <h2>SENHA:</h2>
-            <input type="password" class="password" >
+            <input type="password" class="password" id="data_password" >
 
-            <input type="submit" value="Entrar">
+            <input type="submit" value="Entrar" id="submit_button">
     </div>
+
+     <script src="script.js"></script>
     
 </body>
 
