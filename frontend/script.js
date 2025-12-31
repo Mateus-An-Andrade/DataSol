@@ -571,7 +571,24 @@ function management_shipping_invoice(){
     let adress_sector_resident = document.getElementById("adress_resident_for_invoice").value
 
     btn_to_push_coletive.addEventListener("click",function(){
-        prompt("Atenção! O sistema está prestes a enviar a fatura de energia para todo o bairro! Para confirmar o ID do usuário:")
+        const id_adm = prompt("Atenção! O sistema está prestes a enviar a fatura de energia para todo o bairro! Para confirmar o envio, digite a identificação do administrador:")
+
+        fetch("http://127.0.0.1:5000/shipping_coletive",{
+            method:"POST",
+            headers:{
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                id_admin: id_adm
+            })
+        })
+        .then(response => response.json())
+        .then(data_server =>
+            //console.log("resposta do servidor:",data_server)
+            alert(data_server['mensagem do servidor'])
+            
+        )
+
     })
 
     btn_to_push_unic_confirm.addEventListener("click", function(){
@@ -713,7 +730,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
             open_inner_option("sending_bills_btn", "to_push_invoice", "block")
-                //management_shipping_invoice()
+                management_shipping_invoice()
             open_inner_option("to_push_unic", "conteiner_infor_resident", "flex")
     }
 
