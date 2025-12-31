@@ -560,8 +560,6 @@ function control_supply_energ(){
 
 function management_shipping_invoice(){
 
-    //VOLTAR AQUI MAIS TARDE
-
     const btn_to_push_unic_confirm = document.getElementById("confirme_to_push")
     const btn_to_push_unic_cancel = document.getElementById("cancel_to_push")
     const btn_to_push_coletive = document.getElementById("to_push_coletive")
@@ -570,7 +568,8 @@ function management_shipping_invoice(){
     let name_resident = document.getElementById("name_resident_for_invoice").value
     let adress_sector_resident = document.getElementById("adress_resident_for_invoice").value
 
-    btn_to_push_coletive.addEventListener("click",function(){
+    if(btn_to_push_coletive){    
+        btn_to_push_coletive.addEventListener("click",function(){
         const id_adm = prompt("Atenção! O sistema está prestes a enviar a fatura de energia para todo o bairro! Para confirmar o envio, digite a identificação do administrador:")
 
         fetch("http://127.0.0.1:5000/shipping_coletive",{
@@ -583,21 +582,27 @@ function management_shipping_invoice(){
             })
         })
         .then(response => response.json())
-        .then(data_server =>
+        .then(data_server =>{
             //console.log("resposta do servidor:",data_server)
             alert(data_server['mensagem do servidor'])
+            location.reload();
             
-        )
+        })
 
-    })
+    })}
 
-    btn_to_push_unic_confirm.addEventListener("click", function(){
-        fetch("/shipping_unic",{
+
+    if(btn_to_push_unic_confirm){
+        btn_to_push_unic_confirm.addEventListener("click", function(){
+        let id_resident = document.getElementById("id_resident_for_invoice")?.value;
+        let name_resident = document.getElementById("name_resident_for_invoice")?.value;
+        let adress_sector_resident = document.getElementById("adress_resident_for_invoice")?.value;
+        fetch("http://127.0.0.1:5000/shipping_unic",{
             method:"POST",
             headers:{
                 'Content-type': 'application/json',
             },
-            credentials: "include",
+
             body: JSON.stringify({
                 id: id_resident,
                 name: name_resident,
@@ -606,11 +611,23 @@ function management_shipping_invoice(){
         })
         
         .then(response => response.json())
-        .then(data =>
-            console.log("resposta do servidor:",data)
-        )
+        .then(data =>{
+            alert("Fatura enviada para: "+data["Fatura enviada para"]+ " Com sucesso!");
+            location.reload();
+        })
 
-    })
+        .catch(error => {
+            console.error("Erro na requisição:", error); 
+            alert("Não foi possível conectar ao servidor. Verifique o Console (F12).");
+        });
+
+    })}
+    if(btn_to_push_unic_cancel){
+        btn_to_push_unic_cancel.addEventListener("click",function(){
+            location.reload()
+        })
+    }
+
 
 }
 
@@ -730,8 +747,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
             open_inner_option("sending_bills_btn", "to_push_invoice", "block")
-                management_shipping_invoice()
             open_inner_option("to_push_unic", "conteiner_infor_resident", "flex")
+                management_shipping_invoice()
     }
 
     close_menu("production_and_consumption_menu")
