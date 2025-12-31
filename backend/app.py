@@ -454,9 +454,17 @@ def shipping_coletive_invoice():
     return{'mensagem do servidor': messege_sucess}
 
 
-@app.get("/shipping_unic")
+@app.route("/shipping_unic", methods=["POST"])
 def shipping_unic_invoice():
-    request.json()
+    resident_invoice = request.get_json()
+
+    result = resident_invoice["name"]
+
+    return{"Fatura enviada para":result}
+
+
+
+
 
 
 
