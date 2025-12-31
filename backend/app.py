@@ -387,7 +387,8 @@ def control_supply():
             return{"consumo_do_setor": round(consumption_alfa,2),
                    "produção_do_setor": round(values_production,2),
                    "eficiência": round(eficiency,2),
-                   "deficiência": round(deficiency,2)
+                   "deficiência": round(deficiency,2),
+                   "SETOR": "ALFA"
                    }
 
         elif report_data_sector == "SETOR BRAVO":
@@ -397,7 +398,8 @@ def control_supply():
             return{"consumo_do_setor": round(consumption_bravo,2),
                    "produção_do_setor": round(values_production,2),
                    "eficiência": round(eficiency,2),
-                   "deficiência": round(deficiency,2)}
+                   "deficiência": round(deficiency,2),
+                   "SETOR": "BRAVO"}
         
         elif report_data_sector == "SETOR CHARLIE":
             consumption_charlie = round(percent_sectors[2],2)*consumption
@@ -406,7 +408,8 @@ def control_supply():
             return{"consumo_do_setor": round(consumption_charlie,2),
                    "produção_do_setor": round(values_production,2),
                    "eficiência": round(eficiency,2),
-                   "deficiência": round(deficiency,2)}
+                   "deficiência": round(deficiency,2), 
+                   "SETOR": "CHARLIE"}
 
         elif report_data_sector == "SETOR DELTA":
             consumption_delta = round(percent_sectors[3],2)*consumption
@@ -415,7 +418,8 @@ def control_supply():
             return{"consumo_do_setor": round(consumption_delta,2),
                    "produção_do_setor": round(values_production,2),
                    "eficiência": round(eficiency,2),
-                   "deficiência": round(deficiency,2)}
+                   "deficiência": round(deficiency,2),
+                   "SETOR": "DELTA"}
 
         elif report_data_sector == "SETOR ECHO":
             consumption_echo = round(percent_sectors[4],2)*consumption
@@ -424,7 +428,8 @@ def control_supply():
             return{"consumo_do_setor": round(consumption_echo,2),
                    "produção_do_setor": round(values_production,2),
                    "eficiência": round(eficiency,2),
-                   "deficiência": round(deficiency,2)}
+                   "deficiência": round(deficiency,2),
+                   "SETOR": "ECHO"}
 
  
     return {
@@ -437,6 +442,17 @@ def control_supply():
 
 
 #===========================================================================================================================
+
+@app.route("/shipping_coletive", methods = ["POST"])
+def shipping_coletive_invoice():
+    id_admin = request.get_json()
+    id_permission = id_admin.get("id_admin")
+
+    if id_permission == "469191-1":
+        messege_sucess = "Contas enviadas com sucesso!"
+        
+    return{'mensagem do servidor': messege_sucess}
+
 
 @app.get("/shipping_unic")
 def shipping_unic_invoice():
