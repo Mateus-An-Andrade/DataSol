@@ -227,7 +227,7 @@ def report_prod_and_cons_menu():
                 sector_result = cursor.fetchall()
             
             for row in sector_result:
-                sector_labels.append(row[0])         
+                sector_labels.append(row[1])         
                 sector_values.append(row[4])
                 
             cursor.close()
@@ -288,52 +288,55 @@ def analyis_prevent():
 
 @app.get("/energ_supply_backup")
 def production_for_backup():
-
     production = production_potential()
     consumption = consumption_energ()
 
     total_production = round(sum(production["valores"]), 2)
+    total_cons = sum(consumption["valores"])
 
     sectors = ["ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO"]
-
     percentages = []
     remaining = 1.0
 
-    # Gera percentuais para todos menos o último
+    # Configuração do Backup
+    backup_resource = 60000
+    saldo_solar = round(total_production - total_cons, 2)
+
+    # Lógica de porcentagens (distribuição por setor)
     for i in range(len(sectors) - 1):
         value = round(random.uniform(0.10, min(0.25, remaining)), 2)
         percentages.append(value)
         remaining -= value
-
-    # Último setor recebe o restante
     percentages.append(round(remaining, 2))
 
     labels = []
     values = []
-
     for sector, percent in zip(sectors, percentages):
         labels.append(sector)
         values.append(round(total_production * percent, 2))
 
-    supply_backup = round(
-        sum(production["valores"]) - sum(consumption["valores"]),
-        2
-    )
+    # O SALDO TOTAL (Backup disponível + déficit ou sobra solar)
+    supply_backup = round(backup_resource + saldo_solar, 2)
 
     min_percent = min(percentages)
     index_min = percentages.index(min_percent)
     sector_needed = sectors[index_min]
 
+    # CORREÇÃO DO ERRO DE VARIÁVEL AQUI:
     if supply_backup <= 0:
         time_supply = 0
+        final_supply = supply_backup
     else:
-        time_supply = round(supply_backup / 24, 2)
+        # Usamos a variável 'supply_backup' que já existe para o cálculo
+        time_supply = round((supply_backup / total_cons) * 24, 2)
+        # Só depois definimos o final_supply
+        final_supply = supply_backup
 
     return {
         "labels": labels,
         "values": values,
         "total_production": total_production,
-        "supply": supply_backup,
+        "supply": final_supply,
         "time_supply": time_supply,
         "sector_needed": sector_needed
     }
