@@ -343,9 +343,9 @@ function consumptionVSproduction(){
 
 function reports_menu(id_canvas,id_btn,type_report){
     const conteiner_graph = document.getElementById(id_canvas)
-    const btn_report = document.getElementById(id_btn)
+    let btn_report = document.getElementById(id_btn)
 
-    btn_report.onclick = function(){
+    btn_report.addEventListener("click", () =>{
 
         if (type_report === "btn_reports_for_sectors"){
             conteiner_graph.style.display = "block"
@@ -427,9 +427,7 @@ function reports_menu(id_canvas,id_btn,type_report){
                 make_data_graph("continer_graphics_reports",data_report_consumption_ind,"report_consumption_individuals")
             })
         }
-
-
-    }
+    })
 }
 
 function sectors_and_panel_information(id_sector){
@@ -513,6 +511,9 @@ function energ_backup(){
         input_management_backup.addEventListener("click",function(){
             if (data.supply <= 0){
                 alert("Quantidade de suprimento insuficiente para ativação!")
+        }
+        else if(data.supply >0){
+            alert("Backup acionado!")
         }
         })
     
@@ -656,23 +657,27 @@ document.addEventListener("DOMContentLoaded", function () {
  }
 
         {open_inner_option("btn_reports_for_pannels", "continer_graphics_and_sectors_reports", "grid")
-            reports_menu("continer_graphics_reports","alfa_sector_graph", "btn_reports_for_pannels")
-            reports_menu("continer_graphics_reports","bravo_sector_graph", "btn_reports_for_pannels")
-            reports_menu("continer_graphics_reports","charlie_sector_graph", "btn_reports_for_pannels")
-            reports_menu("continer_graphics_reports","delta_sector_graph", "btn_reports_for_pannels")
-            reports_menu("continer_graphics_reports","echo_sector_graph", "btn_reports_for_pannels")}
-
+            document.getElementById("btn_reports_for_pannels").addEventListener("click", () => {
+                reports_menu("continer_graphics_reports", "alfa_sector_graph", "btn_reports_for_pannels");
+                reports_menu("continer_graphics_reports", "bravo_sector_graph", "btn_reports_for_pannels");
+                reports_menu("continer_graphics_reports", "charlie_sector_graph", "btn_reports_for_pannels");
+                reports_menu("continer_graphics_reports", "delta_sector_graph", "btn_reports_for_pannels");
+                reports_menu("continer_graphics_reports", "echo_sector_graph", "btn_reports_for_pannels");
+            });
+        }
         {open_inner_option("btn_reports_for_sectors_consumption", "continer_graphics_and_sectors_reports", "grid")
             reports_menu("continer_graphics_reports","btn_reports_for_sectors_consumption","btn_reports_for_sectors_consumption")
                 
 
         {open_inner_option("btn_reports_for_individuals_consumption", "continer_graphics_and_sectors_reports", "grid")
-            reports_menu("continer_graphics_reports","alfa_sector_graph", "btn_reports_for_individuals_consumption")
-            reports_menu("continer_graphics_reports","bravo_sector_graph", "btn_reports_for_individuals_consumption")
-            reports_menu("continer_graphics_reports","charlie_sector_graph", "btn_reports_for_individuals_consumption")
-            reports_menu("continer_graphics_reports","delta_sector_graph", "btn_reports_for_individuals_consumption")
-            reports_menu("continer_graphics_reports","echo_sector_graph", "btn_reports_for_individuals_consumption")
-           }
+           document.getElementById("btn_reports_for_individuals_consumption").addEventListener("click", () => {
+                reports_menu("continer_graphics_reports", "alfa_sector_graph", "btn_reports_for_individuals_consumption");
+                reports_menu("continer_graphics_reports", "bravo_sector_graph", "btn_reports_for_individuals_consumption");
+                reports_menu("continer_graphics_reports", "charlie_sector_graph","btn_reports_for_individuals_consumption");
+                reports_menu("continer_graphics_reports", "delta_sector_graph", "btn_reports_for_individuals_consumption");
+                reports_menu("continer_graphics_reports", "echo_sector_graph", "btn_reports_for_individuals_consumption");
+            });
+        }
 
                                                                                                  //Acima estão as funçoes do menu "Relatórios", as funções somente abrem e escondem interfaces
         }
