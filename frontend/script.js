@@ -1,4 +1,8 @@
 //const { createElement } = require("react")
+let currentChart = null;
+let chartPrincipal = null;
+let chartSetor = null;
+let principalCriado = false;
 
 async function init_system(type){
     //const choice = prompt("Digite 1 para Acesso de administrador / Digite 2 para Acesso de morador")
@@ -135,10 +139,15 @@ function updateReportPanel(data) {
 
 function make_data_graph(id_canvas, data, type){
     const conteiner = document.getElementById(id_canvas);
+    const canvas = document.getElementById(id_canvas);
+
+        if (currentChart) {
+        currentChart.destroy();
+    }
 //==========================================================================================================================
     //bloco pertencente a primeira função: consumo e produção:
     if(type === "production"){
-        new Chart(conteiner, {
+            currentChart = new Chart(conteiner, {
             type: "bar",
             data: {
                 labels: data.horas,
@@ -154,7 +163,7 @@ function make_data_graph(id_canvas, data, type){
     }
     
     else if(type === "consumption"){
-                new Chart(conteiner, {
+                currentChart =  new Chart(conteiner, {
                 type: "line",
                 data: {
                     labels: data.horas,
@@ -171,7 +180,7 @@ function make_data_graph(id_canvas, data, type){
     }
     
     else if(type === "consumptionVSproduction"){
-        new Chart(conteiner, {
+        currentChart =  new Chart(conteiner, {
             data: {
             labels: data.horas,
             datasets: [
@@ -198,8 +207,8 @@ function make_data_graph(id_canvas, data, type){
 //==========================================================================================================================
     }
 
-    else if (type ==="report"){
-        new Chart(conteiner, {
+   else if (type ==="report" && id_canvas === "continer_graphics_reports" || id_canvas === "infor_grafics_for_backup"){
+        currentChart =  new Chart(conteiner, {
             type: "pie",
             data: {
                 labels: data.labels,
@@ -212,9 +221,57 @@ function make_data_graph(id_canvas, data, type){
             }
         });
     }
+
+
+    if (id_canvas === "infor_grafics_principal" && type === "report") {
+
+        if (chartPrincipal) {
+            chartPrincipal.destroy();
+        }
+
+        chartPrincipal = new Chart(canvas, {
+            type: "pie",
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: "Produção potencial dos setores (kWh)",
+                    data: data.values,
+                    backgroundColor: ['#1EA91B','#EEAC03','#F56B07','#3A048F','#8F3F04'],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        return;
+    }
+
+
+    // =========================
+    // GRÁFICO DO SETOR (DINÂMICO)
+    // =========================
+    if (id_canvas === "graf_supply_and_consum" && type === "report_sector_individual") {
+
+        if (chartSetor) {
+            chartSetor.destroy();
+        }
+
+        chartSetor = new Chart(canvas, {
+            type: "pie",
+            data: {
+                labels: ["Produção", "Consumo"],
+                datasets: [{
+                    label: "Eficiência do setor",
+                    data: [data.produção_do_setor, data.consumo_do_setor],
+                    backgroundColor: ['#1EA91B','#C40B0B'],
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
     
     else if (type === "panels") {
-        new Chart(conteiner, {
+         currentChart = new Chart(conteiner, {
             type: "bar",
             data: {
                 labels: data.labels,
@@ -238,7 +295,7 @@ function make_data_graph(id_canvas, data, type){
     }
 
        else if (type ==="report_consumption_sectors"){
-        new Chart(conteiner, {
+         currentChart = new Chart(conteiner, {
             type: "pie",
             data: {
                 labels: data.labels,
@@ -253,7 +310,7 @@ function make_data_graph(id_canvas, data, type){
     }
 
     else if (type === "report_consumption_individuals"){
-            new Chart(conteiner, {
+            currentChart = new Chart(conteiner, {
                 type: "bar",
                 data: {
                     labels: data.sector,
@@ -263,36 +320,6 @@ function make_data_graph(id_canvas, data, type){
                         backgroundColor: '#C40B0B',
                         borderColor: "#031626",      
                         borderWidth: 1
-                }]
-            }
-        });
-    }
-
-    else if (type ==="report_for_backup"){
-        new Chart(conteiner, {
-            type: "pie",
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: "Produção potencial dos setores (kWh)",
-                    data: data.values,
-                    backgroundColor: ['#1EA91B','#EEAC03','#F56B07','#3A048F','#8F3F04'],     
-                    borderWidth: 1
-                }]
-            }
-        });
-    }
-
-    else if (type ==="report_sector_individual"){
-        new Chart(conteiner, {
-            type: "pie",
-            data: {
-                labels: ["Produção", "Consumo"],
-                datasets: [{
-                    label: "Eficiência e deficiência do setor",
-                    data: [data.produção_do_setor, data.consumo_do_setor],
-                    backgroundColor: ['#1EA91B','#C40B0B'],     
-                    borderWidth: 1
                 }]
             }
         });
@@ -502,7 +529,7 @@ function energ_backup(){
     .then(response => response.json())
     .then(data =>{
         console.log("dados retornados para relatório backup:", data)
-        make_data_graph("infor_grafics_for_backup",data,"report_for_backup")
+        make_data_graph("infor_grafics_for_backup",data,"report")
 
         inform_supply.textContent = data.supply
         inform_time_supply.textContent = data.time_supply
@@ -531,7 +558,7 @@ function control_supply_energ(){
         .then(response => response.json())
         .then(data => {
             console.log("dados retornados para o controle de energia:", data)
-            make_data_graph("infor_grafics", data, "report")
+            make_data_graph("infor_grafics_principal", data, "report")
 
             infor_sector_energ.forEach(btn => {
                 btn.addEventListener("click", ()=>{
