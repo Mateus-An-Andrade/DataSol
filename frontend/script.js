@@ -552,6 +552,8 @@ function control_supply_energ(){
     const infor_sector_energ = document.querySelectorAll(".supply_energ_input")
     const control_supply_btn = document.getElementById("control_supply_btn")
     const span_title = document.getElementById("title_infor_specific_sector")
+    const management_finish_supply_button = document.getElementById("management_finish_supply_button")
+    const management_pay_supply_button = document.getElementById("management_pay_supply_button")
 
     control_supply_btn.addEventListener("click",() => {
         fetch("http://127.0.0.1:5000/control_supply")
@@ -576,6 +578,17 @@ function control_supply_energ(){
                         console.log("resposta do servidor sobre o setor:", data_sector)
                         span_title.textContent = data_sector.SETOR
                         make_data_graph("graf_supply_and_consum",data_sector,"report_sector_individual")
+
+                        if(management_finish_supply_button){
+                            management_finish_supply_button.addEventListener("click", ()=>{
+                                alert("Iniciando o cancelamento de fornecimento!")
+                            })
+                        }
+                         if(management_pay_supply_button){
+                            management_pay_supply_button.addEventListener("click", ()=>{
+                                alert("Iniciando o reforço de fornecimento!")
+                            })
+                        }
                     })
                 })
             })  

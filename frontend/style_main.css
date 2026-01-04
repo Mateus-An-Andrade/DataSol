@@ -63,8 +63,8 @@ body{
         display: grid;
         background-image: linear-gradient(143deg, #F56B07 60%, #8F3F04 100%);
         border-radius: 1em;
-        height: 6em;
-        width: 12em;
+        height: 5em;
+        width: 11em;
         padding: 0.5rem;
         color: white;
         cursor: pointer;
@@ -75,8 +75,8 @@ body{
      input[type="button"]:hover{
         background-image: linear-gradient(143deg, #F56B07 60%, #8F3F04 100%);
         border-radius: 1em;
-        height: 7em;
-        width: 13em;
+        height: 5.2em;
+        width: 11.2em;
         padding: 0.5rem;
         color: white;
         cursor: pointer;
@@ -131,8 +131,8 @@ body{
 
     .conteiner_data_analysis_consup_prod{
         display: none;
-        width: 100%;
-        height: 75vh;
+        height: 55.6vh;
+        width: 62.7vw;
         background-color: #ffffff;
         border: 1px solid rgb(0, 0, 0);
         border-radius: 1em;
@@ -212,8 +212,9 @@ body{
     .continer_graphics_and_sectors_reports{
         display: none;
         width: 75vw;
-        height: 90vh;
+        height: 70vh;
         grid-template-columns: 20% 80%;
+        justify-items: center;
         margin-bottom: 10%;
         background-color: #d9d9d9;
         border-radius: 2em;
@@ -228,11 +229,12 @@ body{
         
         .continer_graphics_reports{
                 display: grid;
-                width: 50%;
-                height: 50%;
+                height: 57.9vh; 
+                width: 32.6vw;
                 border-radius: 2em;
                 overflow: auto;
                 scrollbar-width: none;
+                
             }
         }
 
@@ -320,20 +322,22 @@ body{
         .status_panel_solar{
             display: grid;
             width: 75vw;
-            height: 75vh;
+            height: 55vh;
             margin-left: 20%;
             grid-template-columns: repeat(4, 0.2fr);
             gap: 1em;
             padding: 1em;
             background-color: #d9d9d9;
             border-radius: 1em;
+            align-items: center;
+            justify-items: center;
 
             .solar_panel{
-                width: 8em;
-                height: 8em;
+                width: 40%;
+                height: 90% ;
                 aspect-ratio: 1 / 1;
                 border: 1px solid black;
-                background-color: #fff;
+                background-color: #3968ae;
                 border-radius: 1em;
                 cursor: pointer;
             }
@@ -398,7 +402,7 @@ body{
             text-align: center;
             cursor: pointer;
             transition-duration: 0.3s;
-            margin-left: 5em;
+            margin-left: 0.5em;
             
               &:hover{
                 width: 13.2em;
@@ -408,7 +412,7 @@ body{
         }
     .conteiner_informs{
         display: none;
-        width: 100%;
+        width: 80%;
         height: 75vh;
         background-color: #d9d9d9;
         border: 1px solid rgba(0, 0, 0, 0);
@@ -431,9 +435,8 @@ body{
             .infor_tec_control_forn{
                 display: flex;
                 flex-direction: column;
-                align-items: center;
                 background-color: #ffffff;
-                width: auto;
+                width: 100%;
                 max-height: 100%;
                 height: auto;
                 border-radius: 1em;
@@ -446,28 +449,32 @@ body{
                     margin-bottom: 10%;
                     width: 100%;
                     height: 90%;
+                    
 
 
                     .inputs_supply_energ{
                         justify-items: center;
                         align-items: center;
-                        width: 30%;
+                        width: 10%;
                         height: 100%;
                         display: grid;
+                    
 
                         .supply_energ_input{
                             width: 9em;
                             height: 1.5em;
-                            font-size: smaller;
+                            font-size: 0.7rem;
                             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                            cursor: pointer;
                         }
                     }
 
 
                     .infor_specific_sector{
                         display: grid;
+                        margin-left: 22%;
                         background-color: rgb(255, 255, 255);
-                        width: auto;
+                        width:65%;
                         height: 100%;
                         border: 1px solid black;
                         border-radius: 2em;
@@ -487,7 +494,7 @@ body{
                         .management_supply_energy{
                             display: flex;
                             flex-direction: row;
-                            max-width: 98%;
+                            max-width: 100%;
                             max-height: 50%;
                             justify-content: space-around;
                             align-items: center;
@@ -496,9 +503,9 @@ body{
                         }
                     }
                         .management_supply_button{
-                            width: 12em;
-                            height: 1.5em;
-                            font-size: smaller;
+                            width: 10em;
+                            height: 2.5em;
+                            font-size: 0.7rem;
                             border: solid 1px black;
                             transition-duration: 0.3s;
                             gap: 1em;
@@ -594,8 +601,8 @@ body{
 
         .infor_grafics{
             display: flex;
-            width: 60%;
-            height: 90%;
+            width: 25%;
+            height: 46%;
         }
 
         .conteiner_graph_and_tec_card{
@@ -653,8 +660,8 @@ body{
         }
          .preventive_analysis{
                 display: none;
-                width: 19em;
-                height: 15em;
+                width: 15em;
+                height: 11em;
                 padding: 1em;
                 border: 1px solid black;
                 border-radius: 1em;
