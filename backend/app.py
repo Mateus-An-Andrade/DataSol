@@ -25,6 +25,10 @@ def get_db_connection():
     )
     return conn
 
+@app.route("/")
+def home():
+    return "API rodando com sucesso 🚀"
+
 @app.get("/clima")
 def clima():
 
