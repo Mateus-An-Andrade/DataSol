@@ -331,7 +331,7 @@ function production_potential(){
     const btn_produ_pot = document.getElementById("potential_btn_prod_energ")
 
     btn_produ_pot.addEventListener("click",function(){
-        fetch("http://127.0.0.1:5000/production_potential")
+        fetch("https://datasol.onrender.com/production_potential")
         .then(response => response.json())
         .then(data =>{
             console.log("dados de produção:",data);  // só para ver no console
@@ -345,7 +345,7 @@ function consumption_daily(){
 
     btn_consup_daily.addEventListener("click",function(){
 
-        fetch("http://127.0.0.1:5000/consumption_daily")
+        fetch("https://datasol.onrender.com/consumption_daily")
         .then(response => response.json())
         .then(data =>{
             console.log("dados de consumo:", data);
@@ -359,7 +359,7 @@ function consumptionVSproduction(){
 
     btn_consup_vs_production.addEventListener("click",function(){
 
-        fetch("http://127.0.0.1:5000/consumption_vs_production")
+        fetch("https://datasol.onrender.com/consumption_vs_production")
         .then(response => response.json())
         .then(data =>{
             console.log("dados de consumo e produção:", data);
@@ -376,7 +376,7 @@ function reports_menu(id_canvas,id_btn,type_report){
 
         if (type_report === "btn_reports_for_sectors"){
             conteiner_graph.style.display = "block"
-            fetch("http://127.0.0.1:5000/report_production_menu",{
+            fetch("https://datasol.onrender.com/report_production_menu",{
                 method: "POST",
                 headers:{
                     'content-type': 'application/json',
@@ -395,7 +395,7 @@ function reports_menu(id_canvas,id_btn,type_report){
 //--------------------------------------------------------------------------------------------------------------------------
         }else if(type_report === "btn_reports_for_pannels"){
             conteiner_graph.style.display = "block"
-            fetch("http://127.0.0.1:5000/report_production_menu",{
+            fetch("https://datasol.onrender.com/report_production_menu",{
                 method: "POST",
                 headers:{
                     'Content-type': 'application/json',
@@ -417,7 +417,7 @@ function reports_menu(id_canvas,id_btn,type_report){
 //--------------------------------------------------------------------------------------------------------------------------
         else if(type_report === "btn_reports_for_sectors_consumption"){
             conteiner_graph.style.display = "block"
-            fetch("http://127.0.0.1:5000/report_production_menu",{
+            fetch("https://datasol.onrender.com/report_production_menu",{
                 method: "POST",
                 headers:{
                     'content-type': 'application/json',
@@ -437,7 +437,7 @@ function reports_menu(id_canvas,id_btn,type_report){
         else if(type_report === "btn_reports_for_individuals_consumption"){
             conteiner_graph.style.display = "block"
             const sector_ind_consumpiton = document.getElementById(id_btn).dataset.sector
-            fetch("http://127.0.0.1:5000/report_production_menu",{
+            fetch("https://datasol.onrender.com/report_production_menu",{
                 method: "POST",
                 headers:{
                     'content-type': 'application/json',
@@ -475,7 +475,7 @@ function analyis_prevent(data){
     conteiner_informs_preventive_analysis
 
 
-    fetch("http://127.0.0.1:5000/analyis_prevent")
+    fetch("https://datasol.onrender.com/analyis_prevent")
     .then(response => response.json())
     .then(data =>{
         console.log("Dados para análise preventiva: ", data)
@@ -525,7 +525,7 @@ function energ_backup(){
     const inform_sector_needed =  document.getElementById("inform_sector_needed")
     const input_management_backup = document.getElementById("input_management_backup")
 
-    fetch("http://127.0.0.1:5000/energ_supply_backup")
+    fetch("https://datasol.onrender.com/energ_supply_backup")
     .then(response => response.json())
     .then(data =>{
         console.log("dados retornados para relatório backup:", data)
@@ -556,7 +556,7 @@ function control_supply_energ(){
     const management_pay_supply_button = document.getElementById("management_pay_supply_button")
 
     control_supply_btn.addEventListener("click",() => {
-        fetch("http://127.0.0.1:5000/control_supply")
+        fetch("https://datasol.onrender.com/control_supply")
         .then(response => response.json())
         .then(data => {
             console.log("dados retornados para o controle de energia:", data)
@@ -564,7 +564,7 @@ function control_supply_energ(){
 
             infor_sector_energ.forEach(btn => {
                 btn.addEventListener("click", ()=>{
-                    fetch("http://127.0.0.1:5000/control_supply",{
+                    fetch("https://datasol.onrender.com/control_supply",{
                         method: "POST",
                         headers:{
                             'Content-Type': 'Application/json',
@@ -613,7 +613,7 @@ function management_shipping_invoice(){
         btn_to_push_coletive.addEventListener("click",function(){
         const id_adm = prompt("Atenção! O sistema está prestes a enviar a fatura de energia para todo o bairro! Para confirmar o envio, digite a identificação do administrador:")
 
-        fetch("http://127.0.0.1:5000/shipping_coletive",{
+        fetch("https://datasol.onrender.com/shipping_coletive",{
             method:"POST",
             headers:{
                 'Content-type': 'application/json',
@@ -638,7 +638,7 @@ function management_shipping_invoice(){
         let id_resident = document.getElementById("id_resident_for_invoice")?.value;
         let name_resident = document.getElementById("name_resident_for_invoice")?.value;
         let adress_sector_resident = document.getElementById("adress_resident_for_invoice")?.value;
-        fetch("http://127.0.0.1:5000/shipping_unic",{
+        fetch("https://datasol.onrender.com/shipping_unic",{
             method:"POST",
             headers:{
                 'Content-type': 'application/json',
@@ -735,7 +735,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const index_value = event.currentTarget.dataset.index;
                     console.log("Painel clicado:", index_value);
 
-                    fetch("http://127.0.0.1:5000/panels_info", {
+                    fetch("https://datasol.onrender.com/panels_info", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
