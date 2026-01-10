@@ -14,9 +14,9 @@ async function init_system(type){
 
     if(type === "1"){
         select_acess.style.display = "none"
-        await sleep(3000)
+        await sleep(1000)
 
-        data_user.value = "469191-ADM"
+        data_user.value = "4691917-ADM"
         data_password.value = "21345432"
 
         submit_button.addEventListener("click", function(){
@@ -25,19 +25,6 @@ async function init_system(type){
         })
         document.getElementById("overlay_acesso").style.display = "none";
 
-    }else if(type === "2"){
-        select_acess.style.display = "none"
-        await sleep(3000)
-
-        data_user.value = "469191-Morador"
-        data_password.value = "21345432"
-
-        submit_button.addEventListener("click", function(){
-            localStorage.setItem("perfil", type)
-            window.location.href = "main.html"
-        })
-
-        document.getElementById("overlay_acesso").style.display = "none";
     }
 }
 
@@ -48,7 +35,7 @@ function type_interface(){
     const choice = localStorage.getItem("perfil")
 
      if (choice === "1") {
-        ru_type.value = "469191-1";
+        ru_type.value = "4691917-1";
         acess_type.value = "ADM";
      }
 }
