@@ -50,11 +50,7 @@ function type_interface(){
      if (choice === "1") {
         ru_type.value = "469191-1";
         acess_type.value = "ADM";
-        
-    } else if (choice === "2") {
-        ru_type.value = "469191-2";
-        acess_type.value = "MORADOR";
-    }
+     }
 }
 
 function open_menu(id_btn,id_menu, displayType = "grid"){
@@ -234,7 +230,7 @@ function make_data_graph(id_canvas, data, type){
             data: {
                 labels: data.labels,
                 datasets: [{
-                    label: "Produção potencial dos setores (kWh)",
+                    label: "Distribuição dos setores (kWh)",
                     data: data.values,
                     backgroundColor: ['#1EA91B','#EEAC03','#F56B07','#3A048F','#8F3F04'],
                     borderWidth: 1
@@ -471,7 +467,6 @@ function analyis_prevent(data){
     const conteiner_informs_preventive_analysis = document.getElementById("conteiner_informs_preventive_analysis")
     const conteiner_card_prevent_analys = document.getElementById("conteiner_card_prevent_analys")
     title_conteiner.textContent = "Setor data:"
-    
     conteiner_informs_preventive_analysis
 
 
@@ -548,55 +543,84 @@ function energ_backup(){
     
 }
 
+let controlInitialized = false;
+
 function control_supply_energ(){
+
     const infor_sector_energ = document.querySelectorAll(".supply_energ_input")
-    const control_supply_btn = document.getElementById("control_supply_btn")
     const span_title = document.getElementById("title_infor_specific_sector")
     const management_finish_supply_button = document.getElementById("management_finish_supply_button")
     const management_pay_supply_button = document.getElementById("management_pay_supply_button")
 
-    control_supply_btn.addEventListener("click",() => {
-        fetch("https://datasol.onrender.com/control_supply")
+  
+    if (controlInitialized) return;
+    controlInitialized = true;
+
+    // ============================
+    // GRÁFICO PRINCIPAL
+    // ============================
+    fetch("https://datasol.onrender.com/control_supply")
         .then(response => response.json())
         .then(data => {
-            console.log("dados retornados para o controle de energia:", data)
-            make_data_graph("infor_grafics_principal", data, "report")
 
-            infor_sector_energ.forEach(btn => {
-                btn.addEventListener("click", ()=>{
-                    fetch("https://datasol.onrender.com/control_supply",{
-                        method: "POST",
-                        headers:{
-                            'Content-Type': 'Application/json',
-                        },
-                            body:JSON.stringify({
-                            sector_data: btn.value
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data_sector =>{
-                        console.log("resposta do servidor sobre o setor:", data_sector)
-                        span_title.textContent = data_sector.SETOR
-                        make_data_graph("graf_supply_and_consum",data_sector,"report_sector_individual")
+            if (chartPrincipal) chartPrincipal.destroy();
 
-                        if(management_finish_supply_button){
-                            management_finish_supply_button.addEventListener("click", ()=>{
-                                alert("Iniciando o cancelamento de fornecimento!")
-                            })
-                        }
-                         if(management_pay_supply_button){
-                            management_pay_supply_button.addEventListener("click", ()=>{
-                                alert("Iniciando o reforço de fornecimento!")
-                            })
-                        }
-                    })
+            chartPrincipal = make_data_graph(
+                "infor_grafics_principal",
+                data,
+                "report"
+            );
+        });
+
+    // ============================
+    // SETORES
+    // ============================
+    infor_sector_energ.forEach(btn => {
+
+        btn.onclick = () => {
+
+            fetch("https://datasol.onrender.com/control_supply", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sector_data: btn.value
                 })
-            })  
-        })      
-    })   
+            })
+            .then(response => response.json())
+            .then(data_sector => {
+
+                span_title.textContent = data_sector.SETOR;
+
+                if (Chart.getChart("graf_supply_and_consum")) {
+                    Chart.getChart("graf_supply_and_consum").destroy();
+                }
+
+                chartSetor = make_data_graph(
+                    "graf_supply_and_consum",
+                    data_sector,
+                    "report_sector_individual"
+                );
+            });
+        };
+    });
+
+    // ============================
+    // BOTÕES DE GERENCIAMENTO
+    // ============================
+    if (management_finish_supply_button) {
+        management_finish_supply_button.onclick = () => {
+            alert("Iniciando o cancelamento de fornecimento!");
+        };
+    }
+
+    if (management_pay_supply_button) {
+        management_pay_supply_button.onclick = () => {
+            alert("Iniciando o reforço de fornecimento!");
+        };
+    }
 }
-
-
 
 
 function management_shipping_invoice(){
@@ -671,6 +695,23 @@ function management_shipping_invoice(){
 
 
 }
+
+function showOnly(id){
+    document
+      .querySelectorAll("#energetic_management .conteiner_informs #conteiner_informs_tec_control_supply")
+      .forEach(c => c.style.display = "none");
+
+    document.getElementById(id).style.display = "block";
+}
+
+function showEnergetic(id) {
+    document
+        .querySelectorAll(".gestao_energetica .conteiner_informs")
+        .forEach(div => div.style.display = "none");
+
+    document.getElementById(id).style.display = "block";
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -777,25 +818,34 @@ document.addEventListener("DOMContentLoaded", function () {
     {open_menu("management_energ_btn","energetic_management", "block")
         opacity_btns("inner_btn_management_energetic", "energetic_management")
 
-            open_inner_option("preventive_analysis_btn", "conteiner_informs_preventive_analysis", "grid")
-            open_inner_option("preventive_analysis_btn", "preventive_analysis_continer", "block")
-                analyis_prevent()
+        open_menu("management_energ_btn","energetic_management", "block");
+        opacity_btns("inner_btn_management_energetic", "energetic_management");
+  document.getElementById("preventive_analysis_btn")
+        .addEventListener("click", () => {
+            showEnergetic("conteiner_informs_preventive_analysis");
+            analyis_prevent();
+        });
 
-            open_inner_option("backup_energy_btn","conteiner_informs_supply_backup", "block")
-            open_inner_option("backup_energy_btn","conteiner_graph_and_tec_card", "flex")
-                energ_backup()
+    document.getElementById("backup_energy_btn")
+        .addEventListener("click", () => {
+            showEnergetic("conteiner_informs_supply_backup");
+            energ_backup();
+        });
 
-            open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
-            open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "grid")
-                control_supply_energ()
+        open_inner_option("control_supply_btn", "conteiner_informs_energ", "block")
+        open_inner_option("control_supply_btn", "conteiner_informs_tec_control_supply", "grid")
 
+        requestAnimationFrame(() => {
+            controlInitialized = false;
+            control_supply_energ();
+        });
 
-            open_inner_option("sending_bills_btn", "conteiner_informs_energ_sending_bills", "block")
-            open_inner_option("sending_bills_btn", "to_push_invoice", "block")
-            open_inner_option("to_push_unic", "conteiner_infor_resident", "flex")
-                management_shipping_invoice()
+    document.getElementById("sending_bills_btn")
+        .addEventListener("click", () => {
+            showEnergetic("conteiner_informs_energ_sending_bills");
+            management_shipping_invoice();
+        });
     }
-
     close_menu("production_and_consumption_menu")
     close_menu("reports_menu")
     close_menu("panels_menu")

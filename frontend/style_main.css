@@ -412,7 +412,7 @@ body{
         }
     .conteiner_informs{
         display: none;
-        width: 80%;
+        width: 100%;
         height: 75vh;
         background-color: #d9d9d9;
         border: 1px solid rgba(0, 0, 0, 0);
@@ -474,7 +474,7 @@ body{
                         display: grid;
                         margin-left: 22%;
                         background-color: rgb(255, 255, 255);
-                        width:65%;
+                        width:70%;
                         height: 100%;
                         border: 1px solid black;
                         border-radius: 2em;
@@ -525,7 +525,6 @@ body{
 
 /* ====================================================================================================================== */
             .to_push_invoice{
-                display: none;
                 background-color: #fff;
                 width: 80%;
                 height: 90%;
@@ -558,7 +557,6 @@ body{
                 }
 
                 .conteiner_infor_resident{
-                    display: none;
                     flex-direction: column;
                     width: 50%;
                     max-height: 75%;
@@ -596,7 +594,7 @@ body{
                 }
             }
 
-        }
+        
     
 
         .infor_grafics{
@@ -615,7 +613,6 @@ body{
         }
 
         #conteiner_informs_supply_backup {
-            display: none;
             flex-direction: column; 
             gap: 1rem;
         }
@@ -661,7 +658,7 @@ body{
          .preventive_analysis{
                 display: none;
                 width: 15em;
-                height: 11em;
+                height: 12em;
                 padding: 1em;
                 border: 1px solid black;
                 border-radius: 1em;
@@ -683,3 +680,71 @@ body{
         height: 100%; 
     }
 
+}
+
+.gestao_energetica .conteiner_informs {
+    display: none;
+}
+
+.gestao_energetica .conteiner_informs.active {
+    display: block;
+}
+
+/* =================================================
+   PATCH RESPONSIVO SEGURO
+   Não altera layout base (notebook padrão)
+================================================= */
+
+/* Nunca deixa o conteúdo estourar a viewport */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Containers principais não crescem infinitamente */
+.main_content,
+.production_and_consumption,
+.relatorios,
+.paineis,
+.gestao_energetica {
+    max-width: 100%;
+}
+
+/* Evita sobreposição em flex/grids existentes */
+* {
+    box-sizing: border-box;
+}
+
+/* ===============================
+   TELAS MENORES (notebooks menores)
+=============================== */
+@media (max-width: 1366px) {
+
+    /* Permite quebra ao invés de sobrepor */
+    .nav_principal_menu,
+    .status_panel_solar,
+    .continer_card_prevent_analys,
+    .conteiner_graphics_and_sectors_reports {
+        flex-wrap: wrap;
+        overflow-x: auto;
+    }
+
+    /* Gráficos não estouram o container */
+    canvas,
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* ===============================
+   TELAS MUITO GRANDES
+=============================== */
+@media (min-width: 1920px) {
+
+    /* Centraliza sem esticar */
+    .main_content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
